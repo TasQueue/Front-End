@@ -12,6 +12,7 @@ TasQueue - 테스뀨>< 프론트엔드 레포지토리입니다.
 5. 제목과 본문은 반드시 작성해야 하고, 꼬리말은 관련된 이슈가 존재하면 작성한다.
 
 ## Pull Request 컨벤션
+
 ## 개요 :mag:
 
 `어떤 이유에서 이 PR을 시작하게 됐는지에 대한 히스토리를 남겨주세요.`
@@ -24,8 +25,8 @@ TasQueue - 테스뀨>< 프론트엔드 레포지토리입니다.
 
 ## 🍀 Members
 
-| [![텍스트](https://avatars.githubusercontent.com/u/99259398?v=4)](https://github.com/heeyoonjik) | [![텍스트](https://avatars.githubusercontent.com/u/76530562?v=4)](https://github.com/heehminh) | [![텍스트](https://avatars.githubusercontent.com/u/87124432?v=4)](https://github.com/jisupark123) | [![텍스트](https://user-images.githubusercontent.com/90022940/196233863-9a94739e-73ec-4fca-973d-cf77413328ad.png)](https://github.com/HanaPark1) | [![텍스트](https://avatars.githubusercontent.com/u/99737532?v=4)](https://github.com/ijieun) |
+| [![텍스트](https://avatars.githubusercontent.com/u/99259398?v=4)](https://github.com/heeyoonjik) | [![텍스트](https://avatars.githubusercontent.com/u/102508014?v=4)](https://github.com/KanuBang) | [![텍스트](https://avatars.githubusercontent.com/u/87124432?v=4)](https://github.com/jisupark123) | [![텍스트](https://avatars.githubusercontent.com/u/70802352?v=4)](https://github.com/dooli1971039) | [![텍스트](https://avatars.githubusercontent.com/u/99737532?v=4)](https://github.com/ijieun) |
 | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
-|                                           김희윤                                            |                                          이지은                                           |                                            박지수                                            |                                                                   이진경                                                                    |                                        방찬우                                          |
+|                                           김희윤                                            |                                          방찬우                                           |                                            박지수                                            |                                                                   이진경                                                                    |                                        이지은                                          |
 
 
