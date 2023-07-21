@@ -47,7 +47,7 @@ export const FunctionBar = styled.div`
 
 // "테스크 추가하기" 안내말
 export const InfoWord = styled.div`
-  width: 27%;
+  width: 33%;
   height: 57%;
   font-size: 1vw;
   overflow: hidden;
