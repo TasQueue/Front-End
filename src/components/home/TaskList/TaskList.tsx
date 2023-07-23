@@ -1,22 +1,38 @@
 import React from 'react';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { selectedDateState, toDoState } from 'recoil/test/atoms';
 import * as T from './TaskList.styled';
+import DragabbleCard from './DragabbleCard';
 
 const TaskList: React.FC = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const [toDos, setToDos] = useRecoilState(toDoState);
+  const selectedDate = useRecoilValue(selectedDateState);
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth() + 1;
+  const day = selectedDate.getDate();
+  const dateString = `${year}년 ${month}월 ${day}일`;
 
   const handleCalendar = () => {
-    console.log('Mark At Calendar');
+    return 1;
   };
   const handleTask = () => {
-    console.log('Create Task');
+    return 1;
+  };
+
+  const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
+    if (!destination) return;
+    setToDos((oldToDos) => {
+      const toDosCopy = [...oldToDos];
+      toDosCopy.splice(source.index, 1);
+      toDosCopy.splice(destination?.index, 0, draggableId);
+      return toDosCopy;
+    });
   };
 
   return (
     <T.TaskListContainer>
-      <T.Header>{`${year}년 ${month}월 ${day}일`} </T.Header>
+      <T.Header>{dateString} </T.Header>
       <T.FunctionBar>
         <T.InfoWord>
           <span>Task 추가하기</span>
@@ -30,6 +46,21 @@ const TaskList: React.FC = () => {
           </T.CreateTask>
         </T.Buttons>
       </T.FunctionBar>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <T.Wrapper>
+          <Droppable droppableId='one'>
+            {(magic) => (
+              /* eslint-disable-next-line */
+              <div ref={magic.innerRef} {...magic.droppableProps}>
+                {toDos.map((toDo, index) => (
+                  <DragabbleCard key={toDo} index={index} toDo={toDo} />
+                ))}
+                {magic.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </T.Wrapper>
+      </DragDropContext>
     </T.TaskListContainer>
   );
 };

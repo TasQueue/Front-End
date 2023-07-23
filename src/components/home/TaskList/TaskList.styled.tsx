@@ -15,16 +15,10 @@ export const TaskListContainer = styled.section`
   justify-content: flex-start;
   align-items: center;
   padding-top: 20px;
-  overflow: scroll;
   font-family: 'Orbit', sans-serif;
 `;
 
-/* 
-chan's mention
-width 92%
-*/
-
-// 현재 년/월/일 => 후에는 현재 선태된 날짜가 되어야 함
+// 선택된 날짜를 보여주는 Header
 export const Header = styled.header`
   width: 92%;
   font-size: 2.8vw;
@@ -106,4 +100,16 @@ export const CreateTask = styled.button`
     position: relative;
     bottom: 1px;
   }
+`;
+
+// toDoList Wrapper
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 10px;
+  width: 92%;
+  height: 82%;
+  background-color: transparent;
 `;
