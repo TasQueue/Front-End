@@ -29,7 +29,7 @@ a{
   color: inherit;
 }
 
-button,p,input{
+button,p{
     all: unset;
 }
 
