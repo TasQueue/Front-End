@@ -112,4 +112,5 @@ export const Wrapper = styled.div`
   width: 92%;
   height: 82%;
   background-color: transparent;
+  overflow-y: scroll;
 `;
