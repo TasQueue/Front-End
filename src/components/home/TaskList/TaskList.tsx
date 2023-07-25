@@ -8,10 +8,7 @@ import DragabbleCard from './DragabbleCard';
 const TaskList: React.FC = () => {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const selectedDate = useRecoilValue(selectedDateState);
-  const year = selectedDate.getFullYear();
-  const month = selectedDate.getMonth() + 1;
-  const day = selectedDate.getDate();
-  const dateString = `${year}년 ${month}월 ${day}일`;
+  const dateString = `${selectedDate.getFullYear()}년 ${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일`;
 
   const handleCalendar = () => {
     return 1;

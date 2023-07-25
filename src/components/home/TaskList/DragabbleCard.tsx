@@ -9,16 +9,15 @@ function DragabbleCard({ toDo, index }) {
 
   return (
     <Draggable key={toDo} draggableId={toDo} index={index}>
-      {(magic) => (
-        <Card
-          style={{ backgroundColor: 'red' }}
-          ref={magic.innerRef}
-          {...magic.dragHandleProps}
-          {...magic.draggableProps}
-        >
-          <Checkbox label={toDo} updatefn={setIsChecked} />
-        </Card>
-      )}
+      {(magic) => {
+        return (
+          <div ref={magic.innerRef} {...magic.dragHandleProps} {...magic.draggableProps}>
+            <Card color={isChecked ? '#c2d9fa' : 'white'}>
+              <Checkbox label={toDo} updatefn={setIsChecked} />
+            </Card>
+          </div>
+        );
+      }}
     </Draggable>
   );
 }
