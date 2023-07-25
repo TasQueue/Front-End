@@ -7,12 +7,14 @@ export const FollowingProfileContainer = styled.div`
   background-color: #ffffff;
   border-radius: 24px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
 `;
 
-export const FollowingProfileWrapParent = styled.div`
+export const FollowingFriendsWrapParent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 0.5vh 2.5vw 0.5vh 1vw;
+  padding: 0.6vh 0;
 `;
 export const FollowingFriendsWrap = styled.div`
   background-color: #ffffff;
