@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import * as S from './SelectOption.styled';
+import BasicTextButton from '../Button/BasicTextButton';
 
 interface Options {
   id: number;
@@ -32,9 +33,11 @@ const SelectOption = ({ optionList, defaultValueId, onClickItem }: SelectOptionP
 
   return (
     <>
-      <S.SelectButton type='button' onClick={() => setOpenList(true)} color={defaultOption?.color}>
-        {defaultOption?.name}
-      </S.SelectButton>
+      <BasicTextButton
+        buttonText={defaultOption?.name || ''}
+        buttonColor={defaultOption?.color || 'black'}
+        onClick={() => setOpenList(true)}
+      />
       <S.OptionListBox $openList={openList}>
         {optionList.map((it) => (
           <S.OptionItemWrapper key={it.id} color={it.color}>

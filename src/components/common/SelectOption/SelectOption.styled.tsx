@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const SelectButton = styled.button<{ color: string | undefined }>`
-  width: fit-content;
-  padding: 5px 10px;
-  font-size: 20px;
-  background: ${(props) => props.color};
-  color: white;
-  border-radius: 16px;
-`;
-
 // TODO 스크롤 커스텀하기
 export const OptionListBox = styled.ul<{ $openList: boolean }>`
   width: fit-content;

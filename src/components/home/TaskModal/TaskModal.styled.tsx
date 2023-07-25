@@ -17,8 +17,10 @@ export const TaskCheckbox = styled(Checkbox)({
 });
 
 export const TaskModalContent = styled.div`
-  background: yellow;
   grid-area: 2/2/3/3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `;
 
 export const TaskNameInput = styled.input`
@@ -29,6 +31,13 @@ export const TaskNameInput = styled.input`
 `;
 
 export const TaskModalButton = styled.div`
-  background: red;
   grid-area: 3/2/4/3;
+  display: flex;
+  justify-content: center;
+
+  & > button {
+    width: 180px;
+    text-align: center;
+    margin: 0 10px;
+  }
 `;
