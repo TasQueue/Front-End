@@ -34,6 +34,5 @@ export const FollowingFriendsImg = styled.img`
 export const FriendsName = styled.p`
   font-size: 1.2rem;
   font-weight: 700;
-  background-image: linear-gradient(transparent 50%, rgba(231, 177, 215, 0.8) 50%);
   background-repeat: no-repeat;
 `;
