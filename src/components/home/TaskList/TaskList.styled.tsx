@@ -25,15 +25,6 @@ export const Header = styled.header`
   margin-bottom: 5px;
 `;
 
-// 상단 2번 째 위치하는 기능 Bar
-export const FunctionBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 92%;
-  height: 5%;
-`;
-
 // form
 export const Form = styled.form`
   display: flex;
@@ -45,7 +36,7 @@ export const Form = styled.form`
   border-radius: 10px;
   background-color: #c2d9fa;
   color: #8c98ae;
-
+  // form의 input
   input {
     width: 70%;
     font-size: 1vw;
@@ -55,7 +46,7 @@ export const Form = styled.form`
     outline: none;
     border: none;
   }
-
+  // form의 캘린더 표시 버튼
   button[type='button'] {
     display: flex;
     justify-content: center;
@@ -75,6 +66,7 @@ export const Form = styled.form`
       color: blue;
     }
   }
+  // form의 + 버튼 (제출 버튼)
   button[type='submit'] {
     display: flex;
     justify-content: center;
@@ -95,27 +87,6 @@ export const Form = styled.form`
     }
   }
 `;
-
-// 캘린더 표시 버튼
-export const MarkAtCalender = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 40%;
-  background-color: #c9c9c9;
-  color: whitesmoke;
-  border: none;
-  border-radius: 8px;
-  padding: 4px;
-  font-size: 0.5vw;
-  overflow: hidden;
-  &:hover {
-    background-color: skyblue;
-    color: blue;
-  }
-`;
-
 // toDoList Wrapper
 export const Wrapper = styled.div`
   display: flex;
