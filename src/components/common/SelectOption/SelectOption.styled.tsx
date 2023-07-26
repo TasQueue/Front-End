@@ -10,6 +10,7 @@ export const OptionListBox = styled.ul<{ $openList: boolean }>`
   border-radius: 10px;
   padding: 0;
   display: ${({ $openList }) => ($openList ? '' : 'none')};
+  position: absolute;
 `;
 
 export const OptionItemWrapper = styled.li<{ color: string }>`
