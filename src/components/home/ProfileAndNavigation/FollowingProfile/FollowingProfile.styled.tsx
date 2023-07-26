@@ -27,7 +27,7 @@ export const FollowingFriendsWrap = styled.div`
   border-radius: 30%;
 `;
 export const FollowingFriendsImg = styled.img`
-  width: 85%;
+  width: 80%;
   border-radius: 50%;
 `;
 
