@@ -4,11 +4,11 @@ import { Draggable } from 'react-beautiful-dnd';
 import { Card } from './DragabbleCard.styled';
 import { Checkbox } from '../../common/Checkbox/Checkbox';
 
-function DragabbleCard({ toDo, index }) {
+function DragabbleCard({ toDo, index, toDoId }) {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <Draggable key={toDo} draggableId={toDo} index={index}>
+    <Draggable key={toDo.id} draggableId={toDoId + ''} index={index}>
       {(magic) => {
         return (
           <div ref={magic.innerRef} {...magic.dragHandleProps} {...magic.draggableProps}>

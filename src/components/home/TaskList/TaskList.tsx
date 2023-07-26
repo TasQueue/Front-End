@@ -1,56 +1,85 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { selectedDateState, toDoState } from 'recoil/test/atoms';
+import { selectedDateState, AlltoDoState } from 'recoil/test/atoms';
 import * as T from './TaskList.styled';
 import DragabbleCard from './DragabbleCard';
 
 const TaskList: React.FC = () => {
-  const [toDos, setToDos] = useRecoilState(toDoState);
+  const [AlltoDos, setAllToDos] = useRecoilState(AlltoDoState);
+  const { register, setValue, handleSubmit } = useForm();
   const selectedDate = useRecoilValue(selectedDateState);
-  const dateString = `${selectedDate.getFullYear()}년 ${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일`;
+  const dateKeyString = selectedDate.toDateString();
+  const headerDateString = `
+    ${selectedDate.getFullYear()}년 
+    ${selectedDate.getMonth() + 1}월 
+    ${selectedDate.getDate()}일
+  `;
 
-  const handleCalendar = () => {
-    return 1;
-  };
-  const handleTask = () => {
-    return 1;
+  // selectedDate가 업데이트될 때 실행
+  useEffect(() => {
+    // 존재하지 않던 날짜일 경우
+    if (!Object.keys(AlltoDos).includes(dateKeyString)) {
+      setAllToDos((allToDos) => {
+        return {
+          ...allToDos,
+          [dateKeyString]: [],
+        };
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDate]);
+
+  const onVaild = ({ toDo }) => {
+    const newToDo = {
+      id: Date.now(),
+      text: toDo,
+    };
+    setAllToDos((allToDos) => {
+      return {
+        ...allToDos,
+        [dateKeyString]: [newToDo, ...allToDos[dateKeyString]],
+      };
+    });
+    setValue('toDo', '');
   };
 
-  const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
+  const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return;
-    setToDos((oldToDos) => {
-      const toDosCopy = [...oldToDos];
+    setAllToDos((allToDos) => {
+      const toDosCopy = [...allToDos[dateKeyString]];
+      const taskObj = toDosCopy[source.index];
       toDosCopy.splice(source.index, 1);
-      toDosCopy.splice(destination?.index, 0, draggableId);
-      return toDosCopy;
+      toDosCopy.splice(destination?.index, 0, taskObj);
+      return {
+        ...allToDos,
+        [dateKeyString]: toDosCopy,
+      };
     });
   };
 
   return (
     <T.TaskListContainer>
-      <T.Header>{dateString} </T.Header>
-      <T.FunctionBar>
-        <T.InfoWord>
-          <span>Task 추가하기</span>
-        </T.InfoWord>
-        <T.Buttons>
-          <T.MarkAtCalender onClick={handleCalendar}>
-            <span>캘린더 표시</span>
-          </T.MarkAtCalender>
-          <T.CreateTask onClick={handleTask}>
-            <span>✚</span>
-          </T.CreateTask>
-        </T.Buttons>
-      </T.FunctionBar>
+      <T.Header>{headerDateString}</T.Header>
+      <T.Form onSubmit={handleSubmit(onVaild as never)}>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <input {...register('toDo', { required: true })} type='text' placeholder='태스크 추가' />
+        <button type='button'>
+          <span>캘린더 표시</span>
+        </button>
+        <button type='submit'>
+          <span>✚</span>
+        </button>
+      </T.Form>
       <DragDropContext onDragEnd={onDragEnd}>
         <T.Wrapper>
           <Droppable droppableId='one'>
             {(magic) => (
-              /* eslint-disable-next-line */
+              /* eslint-disable-next-line react/jsx-props-no-spreading */
               <div ref={magic.innerRef} {...magic.droppableProps}>
-                {toDos.map((toDo, index) => (
-                  <DragabbleCard key={toDo} index={index} toDo={toDo} />
+                {AlltoDos[dateKeyString]?.map((toDo, index) => (
+                  <DragabbleCard key={toDo.id} index={index} toDoId={toDo.id} toDo={toDo.text} />
                 ))}
                 {magic.placeholder}
               </div>

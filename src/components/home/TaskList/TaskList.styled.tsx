@@ -32,32 +32,68 @@ export const FunctionBar = styled.div`
   align-items: center;
   width: 92%;
   height: 5%;
-  padding-left: 10px;
-  padding-right: 15px;
+`;
+
+// form
+export const Form = styled.form`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 92%;
+  height: 5%;
+  padding: 10px;
   border-radius: 10px;
   background-color: #c2d9fa;
   color: #8c98ae;
-`;
 
-// "테스크 추가하기" 안내말
-export const InfoWord = styled.div`
-  width: 33%;
-  height: 57%;
-  font-size: 1vw;
-  overflow: hidden;
-  span {
-    position: relative;
-    bottom: 1px;
+  input {
+    width: 70%;
+    font-size: 1vw;
+    background-color: transparent;
+    text-align: left;
+    font-family: inherit;
+    outline: none;
+    border: none;
   }
-`;
 
-// 캘린더 표시, 테스크 생성 버튼들의 div
-export const Buttons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 30%;
-  height: 65%;
+  button[type='button'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: 20%;
+    background-color: #c9c9c9;
+    color: whitesmoke;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin-right: 2rem;
+    font-size: 0.5vw;
+    overflow: hidden;
+    &:hover {
+      background-color: skyblue;
+      color: blue;
+    }
+  }
+  button[type='submit'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #c2d9fa;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 1rem;
+    font-size: 1vw;
+    &:hover {
+      background-color: skyblue;
+      color: blue;
+    }
+    span {
+      position: relative;
+      bottom: 1px;
+    }
+  }
 `;
 
 // 캘린더 표시 버튼
@@ -77,28 +113,6 @@ export const MarkAtCalender = styled.button`
   &:hover {
     background-color: skyblue;
     color: blue;
-  }
-`;
-
-// 테스크 생성 모달 버튼
-export const CreateTask = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  color: #c2d9fa;
-  height: 60%;
-  width: 15%;
-  padding-top: 1.3px;
-  border-radius: 8px;
-  font-size: 1vw;
-  &:hover {
-    background-color: skyblue;
-    color: blue;
-  }
-  span {
-    position: relative;
-    bottom: 1px;
   }
 `;
 
