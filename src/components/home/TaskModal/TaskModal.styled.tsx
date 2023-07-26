@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Checkbox } from '@mui/material';
 
 export const TaskModalWrapper = styled.div`
   width: 100%;
@@ -9,12 +8,10 @@ export const TaskModalWrapper = styled.div`
   grid-template-rows: 40px auto 50px;
 `;
 
-export const TaskCheckbox = styled(Checkbox)({
-  '&.Mui-checked': {
-    color: 'gray',
-  },
-  gridArea: '1/1/1/1',
-});
+export const TaskCheckbox = styled.div`
+  place-self: center;
+  grid-area: 1/1/1/1;
+`;
 
 export const TaskModalContent = styled.div`
   grid-area: 2/2/3/3;
@@ -23,11 +20,12 @@ export const TaskModalContent = styled.div`
   justify-content: space-evenly;
 `;
 
-export const TaskNameInput = styled.input`
+export const TaskNameInput = styled.input.attrs({ type: 'text' })`
   font-size: 30px;
   grid-area: 1/2/2/3;
   text-overflow: ellipsis;
   white-space: nowrap;
+  border: none;
 `;
 
 export const TaskModalButton = styled.div`
@@ -39,5 +37,14 @@ export const TaskModalButton = styled.div`
     width: 180px;
     text-align: center;
     margin: 0 10px;
+  }
+`;
+
+export const CheckBoxesWrapper = styled.div`
+  display: flex;
+  font-size: 30px;
+
+  & input {
+    place-self: center;
   }
 `;
