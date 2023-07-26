@@ -46,11 +46,10 @@ const FollowingProfile = () => {
             <F.FollowingFriendsImg src={friend.imgSrc} alt={friend.name} />
             <F.FriendsName
               style={{
-                padding: '0px 5px',
+                padding: '1px 5px',
                 backgroundImage: `linear-gradient(transparent 50%, ${friend.themeColor} 50%)`,
               }}
             >
-              {' '}
               {friend.name}
             </F.FriendsName>
           </F.FollowingFriendsWrap>
