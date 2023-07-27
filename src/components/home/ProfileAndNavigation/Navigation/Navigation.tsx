@@ -5,19 +5,19 @@ const Navigation = () => {
   return (
     <N.NavigationContainer>
       <N.NavigationWrap>
-        <N.NavigationIcon src='/assets/images/Category3.svg' alt='Category3' />
+        <N.NavigationIcon src='/assets/images/Navigation-icon/Category3.svg' alt='Category3' />
         <N.NavigationLabel>카테고리</N.NavigationLabel>
       </N.NavigationWrap>
       <N.NavigationWrap>
-        <N.NavigationIcon src='/assets/images/User-group.svg' alt='User-group' />
+        <N.NavigationIcon src='/assets/images/Navigation-icon/User-group.svg' alt='User-group' />
         <N.NavigationLabel>사람들</N.NavigationLabel>
       </N.NavigationWrap>
       <N.NavigationWrap>
-        <N.NavigationIcon src='/assets/images/Search.svg' alt='Search' />
+        <N.NavigationIcon src='/assets/images/Navigation-icon/Search.svg' alt='Search' />
         <N.NavigationLabel>검색</N.NavigationLabel>
       </N.NavigationWrap>
       <N.NavigationWrap>
-        <N.NavigationIcon src='/assets/images/Settings.svg' alt='Settings' />
+        <N.NavigationIcon src='/assets/images/Navigation-icon/Settings.svg' alt='Settings' />
         <N.NavigationLabel>설정</N.NavigationLabel>
       </N.NavigationWrap>
     </N.NavigationContainer>
