@@ -6,7 +6,7 @@ import BasicTextButton from '../Button/BasicTextButton';
 
 interface Options {
   id: number;
-  name: string;
+  text: string;
   color: string;
 }
 
@@ -34,7 +34,7 @@ const SelectOption = ({ optionList, defaultValueId, onClickItem }: SelectOptionP
   return (
     <>
       <BasicTextButton
-        buttonText={defaultOption?.name || ''}
+        buttonText={defaultOption?.text || ''}
         buttonColor={defaultOption?.color || 'black'}
         onClick={() => setOpenList(true)}
       />
@@ -42,7 +42,7 @@ const SelectOption = ({ optionList, defaultValueId, onClickItem }: SelectOptionP
         {optionList.map((it) => (
           <S.OptionItemWrapper key={it.id} color={it.color}>
             <button type='button' onClick={() => handleClickOption(it.id)}>
-              {it.name}
+              {it.text}
             </button>
           </S.OptionItemWrapper>
         ))}
