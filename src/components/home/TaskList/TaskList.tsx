@@ -8,7 +8,7 @@ import DragabbleCard from './DragabbleCard';
 
 const TaskList: React.FC = () => {
   const { register, setValue, handleSubmit } = useForm(); // react-hook-form
-  const [AlltoDos, setAllToDos] = useRecoilState(AlltoDoState);
+  const [alltoDos, setAllToDos] = useRecoilState(AlltoDoState);
   const selectedDate = useRecoilValue(selectedDateState); // 선택된 날짜 객체
   // AlltoDoState 아톰의 인덱스 서명에 사용될 key 문자열
   const dateKeyString = selectedDate.toDateString();
@@ -22,7 +22,7 @@ const TaskList: React.FC = () => {
   useEffect(() => {
     // 존재하지 않던 날짜일 경우 AlltoDoState에 새롭게 생성
     // ex) ["Wed Jul 26 2023"]: []
-    if (!Object.keys(AlltoDos).includes(dateKeyString)) {
+    if (!Object.keys(alltoDos).includes(dateKeyString)) {
       setAllToDos((allToDos) => {
         return {
           ...allToDos,
@@ -85,8 +85,14 @@ const TaskList: React.FC = () => {
             {(magic) => (
               /* eslint-disable-next-line react/jsx-props-no-spreading */
               <div ref={magic.innerRef} {...magic.droppableProps}>
-                {AlltoDos[dateKeyString]?.map((toDo, index) => (
-                  <DragabbleCard key={toDo.id} index={index} toDoId={toDo.id} toDo={toDo.text} />
+                {alltoDos[dateKeyString]?.map((toDo, index) => (
+                  <DragabbleCard
+                    key={toDo.id}
+                    index={index}
+                    toDoId={toDo.id}
+                    toDo={toDo.text}
+                    dateKeyString={dateKeyString}
+                  />
                 ))}
                 {magic.placeholder}
               </div>
