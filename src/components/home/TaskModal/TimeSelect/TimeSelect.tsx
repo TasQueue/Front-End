@@ -56,18 +56,23 @@ const TimeSelect = () => {
   const [defaultEndTimeId, setDefaultEmdTimeId] = useState(48);
 
   return (
-    <div>
+    <T.TimeSelectWrappers>
       <T.TimeSelectWrapper>
-        <span>시작 시간</span>
-        <BasicTextButton buttonText={timeStartPeriod} buttonColor='black' onClick={handleStartToggle} />
-        <SelectOption optionList={TimeTable} defaultValueId={defaultStartTimeId} onClickItem={clickStartTime} />
+        <T.TimeSelectLabel>시작 시간</T.TimeSelectLabel>
+        <T.TimeSelectButtons>
+          <BasicTextButton buttonText={timeStartPeriod} buttonColor='black' onClick={handleStartToggle} />
+          <SelectOption optionList={TimeTable} defaultValueId={defaultStartTimeId} onClickItem={clickStartTime} />
+        </T.TimeSelectButtons>
       </T.TimeSelectWrapper>
+
       <T.TimeSelectWrapper>
-        <span>종료 시간</span>
-        <BasicTextButton buttonText={timeEndPeriod} buttonColor='black' onClick={handleEndToggle} />
-        <SelectOption optionList={TimeTable} defaultValueId={defaultEndTimeId} onClickItem={clickEndTime} />
+        <T.TimeSelectLabel>종료 시간</T.TimeSelectLabel>
+        <T.TimeSelectButtons>
+          <BasicTextButton buttonText={timeEndPeriod} buttonColor='black' onClick={handleEndToggle} />
+          <SelectOption optionList={TimeTable} defaultValueId={defaultEndTimeId} onClickItem={clickEndTime} />
+        </T.TimeSelectButtons>
       </T.TimeSelectWrapper>
-    </div>
+    </T.TimeSelectWrappers>
   );
 };
 

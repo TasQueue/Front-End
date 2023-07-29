@@ -31,8 +31,9 @@ const SelectOption = ({ optionList, defaultValueId, onClickItem }: SelectOptionP
     setOpenList(false);
   };
 
+  // TODO 열려있을 때 밖을 누르면 창이 닫히도록 할 것
   return (
-    <>
+    <S.OptionSelectWrapper>
       <BasicTextButton
         buttonText={defaultOption?.text || ''}
         buttonColor={defaultOption?.color || 'black'}
@@ -47,7 +48,7 @@ const SelectOption = ({ optionList, defaultValueId, onClickItem }: SelectOptionP
           </S.OptionItemWrapper>
         ))}
       </S.OptionListBox>
-    </>
+    </S.OptionSelectWrapper>
   );
 };
 
