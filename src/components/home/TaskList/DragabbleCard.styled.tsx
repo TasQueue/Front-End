@@ -7,5 +7,5 @@ export const Card = styled.div`
   width: 27vw;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-family: inherit;
-  background-color: 'red';
+  background-color: ${(props) => props.color};
 `;
