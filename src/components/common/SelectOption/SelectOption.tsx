@@ -6,7 +6,7 @@ import BasicTextButton from '../Button/BasicTextButton';
 
 interface Options {
   id: number;
-  name: string;
+  text: string;
   color: string;
 }
 
@@ -31,10 +31,11 @@ const SelectOption = ({ optionList, defaultValueId, onClickItem }: SelectOptionP
     setOpenList(false);
   };
 
+  // TODO 열려있을 때 밖을 누르면 창이 닫히도록 할 것
   return (
-    <>
+    <S.OptionSelectWrapper>
       <BasicTextButton
-        buttonText={defaultOption?.name || ''}
+        buttonText={defaultOption?.text || ''}
         buttonColor={defaultOption?.color || 'black'}
         onClick={() => setOpenList(true)}
       />
@@ -42,12 +43,12 @@ const SelectOption = ({ optionList, defaultValueId, onClickItem }: SelectOptionP
         {optionList.map((it) => (
           <S.OptionItemWrapper key={it.id} color={it.color}>
             <button type='button' onClick={() => handleClickOption(it.id)}>
-              {it.name}
+              {it.text}
             </button>
           </S.OptionItemWrapper>
         ))}
       </S.OptionListBox>
-    </>
+    </S.OptionSelectWrapper>
   );
 };
 

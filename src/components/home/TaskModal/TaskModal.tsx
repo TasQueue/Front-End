@@ -28,29 +28,25 @@ const TaskModal = ({ onClose }) => {
       <T.TaskNameInput type='text' defaultValue='데이터 받아서 세팅데이터 받아서 세팅데이터 받아서 세팅' />
       <CloseIcon sx={{ width: '30px', height: '30px', placeSelf: 'center' }} onClick={onClose} />
       <T.TaskModalContent>
-        <div>
+        <T.TaskCategoryAndDate>
           <CategorySelect />
           <BasicTextButton
             buttonText='2023.7.14'
             buttonColor='black'
             onClick={() => alert('TODO: 날짜 선택 기능 만들기')}
           />
-        </div>
+        </T.TaskCategoryAndDate>
         {!isAllDayTask && <TimeSelect />}
-        <div>
-          <T.CheckBoxesWrapper>
-            <Checkbox label='하루종일' updatefn={setIsAllDayTask} />
-            <Checkbox label='캘린더 표시' updatefn={setIsShowInCalendar} />
-          </T.CheckBoxesWrapper>
-        </div>
+        <T.CheckBoxesWrapper>
+          <Checkbox label='하루종일' updatefn={setIsAllDayTask} />
+          <Checkbox label='캘린더 표시' updatefn={setIsShowInCalendar} />
+        </T.CheckBoxesWrapper>
         <BasicTextButton buttonText='반복 없음' buttonColor='black' onClick={() => handleModalStep(2)} />
+        <T.TaskModalButton>
+          <BasicTextButton buttonText='적용하기' buttonColor='#0066FF' onClick={() => console.log('적용하기')} />
+          <BasicTextButton buttonText='삭제하기' buttonColor='#FF5050' onClick={() => console.log('삭제하기')} />
+        </T.TaskModalButton>
       </T.TaskModalContent>
-
-      {/*  완료/삭제 버튼 만들기 */}
-      <T.TaskModalButton>
-        <BasicTextButton buttonText='적용하기' buttonColor='#0066FF' onClick={() => console.log('적용하기')} />
-        <BasicTextButton buttonText='삭제하기' buttonColor='#FF5050' onClick={() => console.log('삭제하기')} />
-      </T.TaskModalButton>
     </T.TaskModalWrapper>
   );
 };
