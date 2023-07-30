@@ -15,17 +15,23 @@ export const calendarShowingMonthState = atom({
   default: new Date(),
 });
 
-// 임시 toDoState
-export const toDoState = atom({
-  key: 'toDo',
-  default: [
-    '빅데이터 분석 프로그래밍',
-    '동물원 가기',
-    'Buy Groceries Buy Groceries Buy Groceries Buy Groceries Buy Groceries Buy Groceries',
-    '치약 사기',
-    '병원 가기',
-    '책 읽기',
-    '불멍',
-    '웹 프로그래밍',
-  ],
+// ToDo 인터페이스
+export interface IToDo {
+  id: number;
+  text: string;
+}
+
+/* 
+"날짜(key) : task 객체 배열 " 형태를 유도힘
+ex)
+{"Wed Jul 26 2023":[{"id":1690354975709,"text":"야구"},{"id":1690354974825,"text":"농구"}]
+,"Wed Jul 19 2023":[{"id":1690354984171,"text":"피아노"},{"id":1690354982646,"text":"휴식"}}
+*/
+interface IToDoState {
+  [key: string]: IToDo[];
+}
+
+export const AlltoDoState = atom<IToDoState>({
+  key: 'toDoState',
+  default: {},
 });

@@ -6,7 +6,7 @@ export const StyledInput = styled.input.attrs({ type: 'checkbox' })`
   width: 1.3em;
   height: 1.3em;
   border-radius: 0.4em;
-  margin-right: 0.5em;
+  margin-right: 1.5em;
   border: 0.15em solid #c0c0c0;
   outline: none;
   cursor: pointer;
@@ -20,12 +20,12 @@ export const StyledInput = styled.input.attrs({ type: 'checkbox' })`
     content: '✓';
     font-size: 135%;
     color: black;
-    position: absolute;
-    right: 1px;
-    top: -2px;
+    position: relative;
+    right: -2px;
+    top: -2.5px;
   }
 
-  &:checked + span {
+  &:checked + p {
     color: black;
   }
 `;
