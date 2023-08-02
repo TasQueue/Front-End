@@ -13,6 +13,8 @@ export const NavigationContainer = styled.div`
 
 export const NavigationIcon = styled.img`
   width: 1.25vw;
+  display: flex;
+  text-align: center;
 `;
 export const NavigationWrap = styled.div`
   display: flex;
@@ -28,4 +30,15 @@ export const NavigationWrap = styled.div`
 
 export const NavigationLabel = styled.div`
   font-size: 1.4rem;
+  @media (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.2rem;
+  }
 `;

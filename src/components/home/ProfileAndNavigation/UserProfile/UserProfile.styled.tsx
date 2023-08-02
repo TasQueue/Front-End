@@ -13,19 +13,43 @@ export const UserProfileContainer = styled.section`
 `;
 
 export const UserProfileName = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 1000;
   background-image: linear-gradient(transparent 50%, rgba(177, 187, 231, 0.5) 50%);
   background-repeat: no-repeat;
   margin: 0 0 5px 0;
+
+  @media (max-width: 1024px) {
+    font-size: 8px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 7px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 5px;
+  }
 `;
 export const UserProfileStatus = styled.div`
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   background-color: #ffffff;
   border-radius: 20%;
   width: 6.8vw;
   height: 10vh;
   padding: 1vh 0;
+
+  @media (max-width: 1024px) {
+    font-size: 7px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 5px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 3px;
+  }
 `;
 export const UserProfileImg = styled.img`
   width: 90%;

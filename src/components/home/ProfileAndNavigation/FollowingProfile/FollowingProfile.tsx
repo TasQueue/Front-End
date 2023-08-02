@@ -47,7 +47,7 @@ const FollowingProfile = () => {
             <F.FriendsName
               style={{
                 padding: '1px 5px',
-                backgroundImage: `linear-gradient(transparent 50%, ${friend.themeColor} 50%)`,
+                backgroundImage: `linear-gradient(transparent 0.6rem, ${friend.themeColor}  0.6rem`,
               }}
             >
               {friend.name}
