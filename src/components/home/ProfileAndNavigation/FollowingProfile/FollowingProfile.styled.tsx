@@ -34,4 +34,16 @@ export const FriendsName = styled.p`
   font-size: 1.2rem;
   font-weight: 700;
   background-repeat: no-repeat;
+
+  @media (max-width: 1024px) {
+    font-size: 8px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 7px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 5px;
+  }
 `;
