@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { selectedDateState, AlltoDoState } from 'recoil/test/atoms';
 import * as T from './TaskList.styled';
 import DragabbleCard from './DragabbleCard';
+import CategoryModal from '../CategoryModal/CategoryModal';
+import AddCategory from '../CategoryModal/AddCategory';
 
 const TaskList: React.FC = () => {
   const { register, setValue, handleSubmit } = useForm(); // react-hook-form
@@ -66,8 +68,30 @@ const TaskList: React.FC = () => {
       };
     });
   };
+
+  // 카테고리 모달 test
+  const [modalOpen, setModalOpen] = useState(false);
+  const openCategoryModal = () => {
+    // console.log('asdf');
+    setModalOpen(true);
+  };
+  const [addCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
+  const openAddCategoryModal = () => {
+    setAddCategoryModalOpen(true);
+  };
   return (
     <T.TaskListContainer>
+      <div>
+        <button type='button' onClick={openCategoryModal}>
+          <span>카테고리 모달 테스트</span>
+        </button>
+        {modalOpen && <CategoryModal setModalOpen={setModalOpen} />}
+
+        <button type='button' onClick={openAddCategoryModal}>
+          <span>카테고리 추가 모달 테스트</span>
+        </button>
+        {addCategoryModalOpen && <AddCategory setAddCategoryModalOpen={setAddCategoryModalOpen} />}
+      </div>
       <T.Header>{headerDateString}</T.Header>
       <T.Form onSubmit={handleSubmit(onVaild as never)}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
