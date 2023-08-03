@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { catState } from '../../../../recoil/catState';
 import * as U from './UserProfile.styled';
 
 const UserProfile = () => {
@@ -16,7 +18,7 @@ const UserProfile = () => {
     '/assets/images/Cat/goodCat.svg',
     '/assets/images/Cat/perfectCat.svg',
   ];
-  const [currentCat, setCurrentCat] = useState(catImgs[0]);
+  const [currentCat, setCurrentCat] = useRecoilState(catState);
 
   return (
     <U.UserProfileContainer>
