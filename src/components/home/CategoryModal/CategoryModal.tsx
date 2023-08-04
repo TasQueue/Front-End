@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 import { Icategory, categories } from 'recoil/test/atoms';
 import { useRecoilState } from 'recoil';
+import BasicDialog from 'components/common/Dialog/BasicDialog';
 import * as C from './CategoryModal.styled';
+import AddCategory from './AddCategory';
 
-const CategoryModal = ({ setModalOpen }) => {
+const CategoryModal = ({ onClose }) => {
   const [userCategories, setUserCategories] = useRecoilState(categories);
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const closeAddModal = () => {
+    // console.log('asdf');
+    setOpenAddModal(false);
+  };
   const closeModal = () => {
-    setModalOpen(false);
+    onClose();
+  };
+
+  const openAddCategoryModal = () => {
+    console.log(1);
   };
   return (
     <C.CategoryModalListBox>
       <C.CategoryContainer>
-        <C.TitleCard>+ 카테고리 추가</C.TitleCard>
+        <C.TitleCard onClick={() => setOpenAddModal(true)}>+ 카테고리 추가</C.TitleCard>
+        <BasicDialog
+          open={openAddModal}
+          onClose={closeAddModal}
+          contentComponent={<AddCategory onClose={closeAddModal} />}
+        />
+        ;
         <C.CategoryList>
           {userCategories.map((value) => {
             return (
@@ -23,7 +41,7 @@ const CategoryModal = ({ setModalOpen }) => {
         </C.CategoryList>
       </C.CategoryContainer>
       <C.Buttons>
-        <C.CloseButton onClick={closeModal}>X</C.CloseButton>
+        <C.CloseButton onClick={closeModal}>ⅹ</C.CloseButton>
       </C.Buttons>
     </C.CategoryModalListBox>
   );

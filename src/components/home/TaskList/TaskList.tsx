@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { selectedDateState, AlltoDoState } from 'recoil/test/atoms';
+import BasicDialog from 'components/common/Dialog/BasicDialog';
 import * as T from './TaskList.styled';
 import DragabbleCard from './DragabbleCard';
 import CategoryModal from '../CategoryModal/CategoryModal';
-import AddCategory from '../CategoryModal/AddCategory';
 
 const TaskList: React.FC = () => {
   const { register, setValue, handleSubmit } = useForm(); // react-hook-form
@@ -70,27 +70,33 @@ const TaskList: React.FC = () => {
   };
 
   // 카테고리 모달 test
-  const [modalOpen, setModalOpen] = useState(false);
-  const openCategoryModal = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
     // console.log('asdf');
-    setModalOpen(true);
+    setOpenModal(false);
   };
+  /*
   const [addCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
   const openAddCategoryModal = () => {
     setAddCategoryModalOpen(true);
   };
+  */
   return (
     <T.TaskListContainer>
       <div>
-        <button type='button' onClick={openCategoryModal}>
+        <button type='button' onClick={() => setOpenModal(true)}>
           <span>카테고리 모달 테스트</span>
         </button>
+        <BasicDialog open={openModal} onClose={closeModal} contentComponent={<CategoryModal onClose={closeModal} />} />
+        {/*
         {modalOpen && <CategoryModal setModalOpen={setModalOpen} />}
-
+        */}
+        {/*
         <button type='button' onClick={openAddCategoryModal}>
           <span>카테고리 추가 모달 테스트</span>
         </button>
         {addCategoryModalOpen && <AddCategory setAddCategoryModalOpen={setAddCategoryModalOpen} />}
+        */}
       </div>
       <T.Header>{headerDateString}</T.Header>
       <T.Form onSubmit={handleSubmit(onVaild as never)}>

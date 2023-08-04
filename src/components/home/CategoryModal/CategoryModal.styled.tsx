@@ -5,12 +5,11 @@ export const CategoryModalListBox = styled.div`
   justify-content: flex-start;
   width: 48vw;
   height: 55vh;
-  z-index: 999;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: wheat;
+  background-color: aqua;
 `;
 export const CategoryContainer = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ export const CategoryContainer = styled.div`
   // background-color: green;
 `;
 
-export const TitleCard = styled.div`
+export const TitleCard = styled.button.attrs({ type: 'button' })`
   display: flex;
   justify-content: flex-start;
   align-items: center;
