@@ -4,12 +4,15 @@ import { useRecoilState } from 'recoil';
 import { AlltoDoState } from 'recoil/test/atoms';
 import { Checkbox } from 'components/common/Checkbox/Checkbox';
 import { Card } from './DragabbleCard.styled';
+import BasicDialog from '../../common/Dialog/BasicDialog';
+import TaskModal from '../TaskModal/TaskModal';
 
 function DragabbleCard({ toDo, index, toDoId, dateKeyString }) {
   const [alltoDos, setAllToDos] = useRecoilState(AlltoDoState); // 모든 날짜의 taskList
   const [clicked, setClicked] = useState(false); // 클릭 상태(클릭 = true)
   const [checkCnt, setCheckCnt] = useState(0); // 체크 횟수(checkState에 사용)
   const [bgColor, setBgColor] = useState('white'); // 배경색
+  const [openModal, setOpenModal] = useState(false); // 태스크 수정 모달 상태
   const checkState = checkCnt % 2 === 0 ? 'Chekced' : 'UnChecked'; // 체크 횟수가 짝수이면 Checked이고 홀수이면 UnChecked이다.
   // 클릭 했음 (클릭 안 한 상태는 따로 처리하지 않음)
   if (clicked) {
@@ -37,15 +40,20 @@ function DragabbleCard({ toDo, index, toDoId, dateKeyString }) {
     setCheckCnt((prev) => prev + 1); // 체크 횟수 + 1
   }
 
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
   return (
     <Draggable key={toDo.id} draggableId={`${toDoId}`} index={index}>
       {(magic) => {
         return (
           // eslint-disable-next-line react/jsx-props-no-spreading
           <div ref={magic.innerRef} {...magic.dragHandleProps} {...magic.draggableProps}>
-            <Card color={bgColor}>
+            <Card color={bgColor} onClick={() => setOpenModal(true)}>
               <Checkbox label={toDo} updatefn={setClicked} />
             </Card>
+            <BasicDialog open={openModal} onClose={closeModal} contentComponent={<TaskModal onClose={closeModal} />} />
           </div>
         );
       }}
