@@ -37,12 +37,11 @@ export const AlltoDoState = atom<IToDoState>({
 });
 
 // 카테고리
-export interface ICategory {
+export interface Icategory {
   text: string;
   color: string;
 }
-
-export const categories = atom<ICategory[]>({
+export const categories = atom<Icategory[]>({
   key: 'category',
-  default: [{ text: 'adf', color: 'red' }],
+  default: [],
 });

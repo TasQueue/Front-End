@@ -5,15 +5,20 @@ import { categories } from 'recoil/test/atoms';
 import { useRecoilState } from 'recoil';
 import * as T from './AddCategory.styled';
 
+interface IForm {
+  title: string;
+}
+
 const AddCategory = ({ setAddCategoryModalOpen }) => {
-  const { register, setValue, handleSubmit } = useForm();
+  const { register, setValue, handleSubmit } = useForm<IForm>();
   const [color, setColor] = React.useState('#000');
   const [colorModalopen, setColorModalopen] = useState(false);
   const [userCategories, setUserCategories] = useRecoilState(categories);
   const handleChangeComplete = (color) => {
     setColor(color.hex);
   };
-  const onVaild = ({ title }) => {
+  const onVaild = ({ title }: IForm) => {
+    console.log(1);
     const newCategory = {
       text: title,
       color,
@@ -21,7 +26,7 @@ const AddCategory = ({ setAddCategoryModalOpen }) => {
     setUserCategories((oldCategories) => {
       return [...oldCategories, newCategory];
     });
-
+    console.log(userCategories);
     setValue('title', '');
   };
   const closeModal = () => {
@@ -38,7 +43,7 @@ const AddCategory = ({ setAddCategoryModalOpen }) => {
   return (
     <T.AddCategoryModalBox>
       <T.GoToBack onClick={closeModal}>🔙</T.GoToBack>
-      <T.Form onSubmit={handleSubmit(onVaild as never)}>
+      <T.Form onSubmit={handleSubmit(onVaild)}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <T.CategoryInput {...register('title', { required: true })} type='text' placeholder='카테고리를 입력하세요' />
         <T.ColorBar>
