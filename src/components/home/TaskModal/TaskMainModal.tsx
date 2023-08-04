@@ -22,7 +22,7 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
         <Checkbox label='' updatefn={setIsCompleteTask} />
       </T.TaskCheckbox>
       {/* TODO: defaultValue 나중에 수정 가능하게 함수 연결 */}
-      <T.TaskNameInput type='text' defaultValue='데이터 받아서 세팅데이터 받아서 세팅데이터 받아서 세팅' />
+      <T.TaskNameInput type='text' defaultValue='운동하기' />
       <CloseIcon sx={{ width: '30px', height: '30px', placeSelf: 'center' }} onClick={onClose} />
       <T.TaskModalContent>
         <T.TaskCategoryAndDate>
@@ -40,8 +40,22 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
         </T.CheckBoxesWrapper>
         <BasicTextButton buttonText='반복 없음' buttonColor='black' onClick={() => controlStep()} />
         <T.TaskModalButton>
-          <BasicTextButton buttonText='적용하기' buttonColor='#0066FF' onClick={() => console.log('적용하기')} />
-          <BasicTextButton buttonText='삭제하기' buttonColor='#FF5050' onClick={() => console.log('삭제하기')} />
+          <BasicTextButton
+            buttonText='적용하기'
+            buttonColor='#0066FF'
+            onClick={() => {
+              console.log('적용하기');
+              onClose();
+            }}
+          />
+          <BasicTextButton
+            buttonText='삭제하기'
+            buttonColor='#FF5050'
+            onClick={() => {
+              console.log('삭제하기');
+              onClose();
+            }}
+          />
         </T.TaskModalButton>
       </T.TaskModalContent>
     </>
