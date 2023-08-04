@@ -48,9 +48,11 @@ export const NameChange = styled.input`
   appearance: none;
 `;
 export const StatusChange = styled.textarea`
+  width: 30vw;
+  height: 9vh;
   font-size: 1.8rem;
   margin: 0 0 3vh 0;
-
+  resize: none;
   border: none;
   outline: none;
   box-shadow: none;
