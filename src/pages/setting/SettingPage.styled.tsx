@@ -73,6 +73,16 @@ export const ChangeBtn = styled.button`
   border-radius: 16px;
   margin: 0 0 5vh 0;
 `;
+export const Modal = styled.div`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #cefce6;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+`;
 
 export const TwoButtonWrap = styled.div`
   display: flex;
