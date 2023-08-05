@@ -1,10 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
-
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { selectedDateState, calendarShowingMonthState } from 'recoil/test/atoms';
+import { selectedDateState, calendarShowingMonthState, AlltoDoState } from 'recoil/test/atoms';
 import format from 'date-fns/format';
-
 import {
   addDays,
   differenceInCalendarDays,
@@ -25,6 +25,7 @@ const CalendarBody = () => {
   const [calendarStartDate, setCalendarStartDate] = useState(startOfWeek(monthStart));
   const [calendarEndDate, setCalendarEndDate] = useState(endOfWeek(monthEnd));
   const formattedDate = format(selectedDate, 'yyyy년 MM월 dd일');
+  const [alltoDos, setAllToDos] = useRecoilState(AlltoDoState);
 
   useEffect(() => {
     setMonthStart(startOfMonth(currentMonth));
@@ -55,32 +56,60 @@ const CalendarBody = () => {
     return isSameDay(selectedDate, cellDate);
   };
 
+  const onDragEndHandler = (result) => {
+    const originalDate = result.source.droppableId;
+    if (result.destination === null || result.destination === originalDate) return;
+
+    const changedDate = result.destination.droppableId;
+    const taskId = Number(result.draggableId);
+    const changedTask = {
+      id: taskId,
+      text: alltoDos[originalDate].find((item) => item.id === taskId)?.text,
+    };
+    // 1. 드래그 시작 droppable의 날짜에서, 해당 task 삭제
+    setAllToDos((prevData) => ({
+      ...prevData,
+      [originalDate]: prevData[originalDate].filter((item) => item.id !== taskId),
+    }));
+
+    // 2. 드랍된 droppable의 날짜에 해당 task 추가
+    if (!Object.keys(alltoDos).includes(changedDate)) {
+      setAllToDos((allToDos) => {
+        return {
+          ...allToDos,
+          [changedDate]: [],
+        };
+      });
+    }
+
+    setAllToDos((prevData) => ({
+      ...prevData,
+      [changedDate]: [changedTask, ...prevData[changedDate]],
+    }));
+    // setAllToDos((allToDos) => {
+    //   return {
+    //     ...allToDos,
+    //     [changedDate]: [changedTask, ...allToDos[changedDate]],
+    //   };
+    // });
+  };
+
   return (
     <C.CalendarBodyContainer>
-      {monthArray.map((d, index) => (
-        <CalendarBodyCell
-          key={index}
-          data={d}
-          changeSelectedDate={changeSelectedDate}
-          isSelectedDate={isSelectedDate(d)}
-        />
-      ))}
+      <DragDropContext onDragEnd={onDragEndHandler}>
+        {monthArray.map((d, index) => (
+          <CalendarBodyCell
+            key={index}
+            index={index}
+            data={d}
+            changeSelectedDate={changeSelectedDate}
+            isSelectedDate={isSelectedDate(d)}
+          />
+        ))}
+      </DragDropContext>
       {formattedDate}
     </C.CalendarBodyContainer>
   );
 };
 
 export default CalendarBody;
-
-// <CalendarGrid>
-//   {monthArray.map((d) => (
-//       {(provided) => (
-//           <Cell
-//             day={d}
-//             task={filterTask(d)}
-//             changeSelectedDate={changeSelectedDate}
-//             isSelected={isSelectedDate(d)}
-//           />
-//       )}
-//   ))}
-// </CalendarGrid>;
