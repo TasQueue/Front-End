@@ -6,12 +6,14 @@ import { addMonths, format, subMonths } from 'date-fns';
 
 import { useRecoilState } from 'recoil';
 
-import { calendarShowingMonthState } from 'recoil/test/atoms';
+import { calendarShowingMonthState, selectedDateState } from 'recoil/test/atoms';
 
 import * as C from './CalendarHeader.styled';
 
 const CalendarHeader = () => {
   const [currentMonth, setCurrentMonth] = useRecoilState(calendarShowingMonthState);
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
+
   const formattedDate = format(currentMonth, 'yyyy년 MM월');
 
   const toPrevMonth = () => {
@@ -20,11 +22,16 @@ const CalendarHeader = () => {
   const toNextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
   };
+
+  const goTodayDate = () => {
+    setSelectedDate(new Date());
+    setCurrentMonth(new Date());
+  };
   return (
     <C.Header>
       <C.SelectedMonthLabel> {formattedDate}</C.SelectedMonthLabel>
       <C.HeaderRightSection>
-        <C.TodayButton>TODAY</C.TodayButton>
+        <C.TodayButton onClick={goTodayDate}>TODAY</C.TodayButton>
         <C.ButtonContainer>
           <ArrowButton onClick={toPrevMonth} direction='left' />
           <ArrowButton onClick={toNextMonth} direction='right' />

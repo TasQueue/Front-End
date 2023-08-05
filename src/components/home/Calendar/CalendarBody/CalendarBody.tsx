@@ -1,8 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
-
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { selectedDateState, calendarShowingMonthState } from 'recoil/test/atoms';
+import { selectedDateState, calendarShowingMonthState, AlltoDoState } from 'recoil/test/atoms';
 import format from 'date-fns/format';
 
 import {
@@ -25,6 +24,7 @@ const CalendarBody = () => {
   const [calendarStartDate, setCalendarStartDate] = useState(startOfWeek(monthStart));
   const [calendarEndDate, setCalendarEndDate] = useState(endOfWeek(monthEnd));
   const formattedDate = format(selectedDate, 'yyyy년 MM월 dd일');
+  // atom
 
   useEffect(() => {
     setMonthStart(startOfMonth(currentMonth));
@@ -65,22 +65,8 @@ const CalendarBody = () => {
           isSelectedDate={isSelectedDate(d)}
         />
       ))}
-      {formattedDate}
     </C.CalendarBodyContainer>
   );
 };
 
 export default CalendarBody;
-
-// <CalendarGrid>
-//   {monthArray.map((d) => (
-//       {(provided) => (
-//           <Cell
-//             day={d}
-//             task={filterTask(d)}
-//             changeSelectedDate={changeSelectedDate}
-//             isSelected={isSelectedDate(d)}
-//           />
-//       )}
-//   ))}
-// </CalendarGrid>;
