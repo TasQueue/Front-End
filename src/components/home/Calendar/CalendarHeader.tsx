@@ -4,7 +4,7 @@ import React from 'react';
 
 import { addMonths, format, subMonths } from 'date-fns';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { calendarShowingMonthState, selectedDateState } from 'recoil/test/atoms';
 
@@ -12,7 +12,7 @@ import * as C from './CalendarHeader.styled';
 
 const CalendarHeader = () => {
   const [currentMonth, setCurrentMonth] = useRecoilState(calendarShowingMonthState);
-  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
+  const setSelectedDate = useSetRecoilState(selectedDateState);
 
   const formattedDate = format(currentMonth, 'yyyy년 MM월');
 

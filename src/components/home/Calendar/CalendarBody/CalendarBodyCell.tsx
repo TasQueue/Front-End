@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { AlltoDoState, selectedDateState } from 'recoil/test/atoms';
 
 import * as C from './CalendarBodyCell.styled';
@@ -13,7 +13,7 @@ interface ownProps {
 }
 
 const CalendarBodyCell: React.FC<ownProps> = ({ data, changeSelectedDate, isSelectedDate }) => {
-  const [alltoDos, setAllToDos] = useRecoilState(AlltoDoState);
+  const { alltoDos } = useRecoilValue(AlltoDoState);
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
   const dateKeyString = selectedDate.toDateString();
 
