@@ -8,10 +8,12 @@ import * as A from './AddCategory.styled';
 interface IForm {
   title: string;
 }
-
-const AddCategory = ({ onClose }) => {
+interface IAddCategory {
+  onClose: (arg0: boolean) => void;
+}
+const AddCategory = ({ onClose }: IAddCategory) => {
   const { register, setValue, handleSubmit } = useForm<IForm>();
-  const [color, setColor] = React.useState('#000');
+  const [color, setColor] = React.useState('red');
   const [palleteOpen, setPalleteOpen] = useState(false);
   const setUserCategories = useSetRecoilState(categories);
   // 팔레트에서 색깔 선택 완료 시 호출되는 함수

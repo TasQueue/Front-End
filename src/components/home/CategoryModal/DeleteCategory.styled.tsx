@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const AddCategoryModalBox = styled.div`
+export const DeleteCategoryModalBox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -32,14 +32,34 @@ export const Form = styled.form`
   width: 85%;
   height: 80%;
 `;
+// 카테고리 헤더
+export const CategoryHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 7vh;
+  margin-bottom: 2vh;
+`;
 // 카테고리 입력창
 export const CategoryInput = styled.input`
   outline: none;
   border: none;
   background-color: transparent;
-  height: 7vh;
   width: 80%;
+  height: 100%;
   font-size: 2vw;
+`;
+// 업데이트 버튼
+export const UpdateButton = styled.input.attrs({ type: 'submit' })`
+  position: relative;
+  background-color: black;
+  color: white;
+  width: 15%;
+  height: 70%;
+  text-align: center;
+  border-radius: 1vw;
+  border: none;
 `;
 // 버튼 이전 까지의 영역
 export const ColorArea = styled.div`
@@ -94,10 +114,10 @@ export const Pallete = styled.div`
 `;
 
 // 추가하기 버튼
-export const AddButton = styled.input.attrs({ type: 'submit' })`
+export const DeleteButton = styled.input.attrs({ type: 'button' })`
   position: relative;
   left: 12.5vw;
-  background-color: #508bff;
+  background-color: #ff5150;
   color: white;
   width: 7vw;
   height: 4.5vh;
