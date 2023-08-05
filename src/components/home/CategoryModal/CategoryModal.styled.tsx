@@ -4,21 +4,21 @@ export const CategoryModalListBox = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 48vw;
-  height: 55vh;
+  height: 58vh;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: aqua;
 `;
 export const CategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
+  left: 2vw;
   width: 100%;
   padding-top: 2.5vh;
-  // background-color: green;
 `;
 
 export const TitleCard = styled.button.attrs({ type: 'button' })`
@@ -27,10 +27,9 @@ export const TitleCard = styled.button.attrs({ type: 'button' })`
   align-items: center;
   width: 70%;
   height: 5%;
-  // background-color: white;
   padding-left: 1vw;
   margin-bottom: 2.5vh;
-  font-size: 1.3vw;
+  font-size: 2vw;
 `;
 
 export const CategoryList = styled.div`
@@ -39,39 +38,26 @@ export const CategoryList = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   width: 70%;
-  // background-color: red;
-  overflow: scroll;
-`;
-/*
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 10px;
-  width: 92%;
-  height: 82%;
-  background-color: transparent;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: auto;
 `;
 
-*/
 export const ElementCard = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 100px;
-  border-radius: 0.5vw;
+  min-height: 15%;
+  border-radius: 1vw;
   background-color: ${(props) => props.color};
   color: white;
   padding-left: 1vw;
   margin-bottom: 1.5vh;
+  font-size: 2vw;
 `;
 export const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
-  // background-color: blue;
   width: 10%;
   height: 5vh;
   padding-top: 2px;

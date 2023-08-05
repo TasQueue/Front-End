@@ -17,9 +17,6 @@ const CategoryModal = ({ onClose }) => {
     onClose();
   };
 
-  const openAddCategoryModal = () => {
-    console.log(1);
-  };
   return (
     <C.CategoryModalListBox>
       <C.CategoryContainer>
