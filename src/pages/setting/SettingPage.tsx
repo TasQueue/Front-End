@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { catState } from '../../recoil/catState';
 import { userNameState, userStatusState } from '../../recoil/userInfoState';
+import GrassColorButton from './GrassColorButton';
 import * as S from './SettingPage.styled';
 
 const SettingPage = () => {
@@ -69,13 +70,14 @@ const SettingPage = () => {
           <S.StatusChange value={status} onChange={handleStatusChange} />
         </S.ChangeWrap>
         <S.ChangeWrap>
-          <S.GrassChangeLabel>잔디 색</S.GrassChangeLabel>
-          <div>color library</div>
+          <S.GrassChangeLabel>잔디색</S.GrassChangeLabel>
+          <GrassColorButton />
         </S.ChangeWrap>
         <S.ChangeBtn onClick={handleClick}> 변경하기</S.ChangeBtn>
         {/* showModal이 true일 때만 모달 메세지 표시함 */}
         {showModal && <S.Modal>{modalMessage}</S.Modal>}
       </S.ChangeWhiteBox>
+
       <S.TwoButtonWrap>
         <S.LogoutBtn type='submit'>로그아웃</S.LogoutBtn>
         <S.DeleteBtn type='submit'>계정삭제</S.DeleteBtn>

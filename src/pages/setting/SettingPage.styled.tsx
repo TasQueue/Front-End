@@ -62,6 +62,7 @@ export const StatusChange = styled.textarea`
 `;
 
 export const GrassChangeLabel = styled.p``;
+// export const GrassColor = styled.div``;
 
 export const ChangeBtn = styled.button`
   background-color: #d9d9d9;
