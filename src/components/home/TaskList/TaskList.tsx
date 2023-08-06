@@ -39,6 +39,8 @@ const TaskList: React.FC = () => {
     const newToDo = {
       id: Date.now(),
       text: toDo,
+      isCompleted: false,
+      isOnCalendar: true,
     };
     // 새로운 task를 기존 날짜 별 task에 추가
     setAllToDos((allToDos) => {

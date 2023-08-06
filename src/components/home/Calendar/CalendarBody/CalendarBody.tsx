@@ -63,8 +63,7 @@ const CalendarBody = () => {
     const changedDate = result.destination.droppableId;
     const taskId = Number(result.draggableId);
     const changedTask = {
-      id: taskId,
-      text: alltoDos[originalDate].find((item) => item.id === taskId)?.text,
+      ...alltoDos[originalDate].find((item) => item.id === taskId),
     };
     // 1. 드래그 시작 droppable의 날짜에서, 해당 task 삭제
     setAllToDos((prevData) => ({
@@ -86,12 +85,6 @@ const CalendarBody = () => {
       ...prevData,
       [changedDate]: [changedTask, ...prevData[changedDate]],
     }));
-    // setAllToDos((allToDos) => {
-    //   return {
-    //     ...allToDos,
-    //     [changedDate]: [changedTask, ...allToDos[changedDate]],
-    //   };
-    // });
   };
 
   return (
@@ -107,7 +100,6 @@ const CalendarBody = () => {
           />
         ))}
       </DragDropContext>
-      {formattedDate}
     </C.CalendarBodyContainer>
   );
 };

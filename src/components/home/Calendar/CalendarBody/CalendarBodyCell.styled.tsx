@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-const CalendarBodyCellContainer = styled.div<{ isSelectedDate: boolean }>`
-  background-color: ${(props) => (props.isSelectedDate ? '#c2d9fa' : 'white')};
+const CalendarBodyCellContainer = styled.div<{
+  isSelectedDate: boolean;
+  backgroundOpacityRatio: number;
+  rgbObj: object;
+}>`
+  background-color: rgba(194, 217, 250, ${(props) => props.backgroundOpacityRatio});
   border-radius: 12px;
-  border: 1px solid #dedede;
+  border: 2px solid ${(props) => (props.isSelectedDate ? 'black' : '#dedede')};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
