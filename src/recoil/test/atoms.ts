@@ -19,6 +19,8 @@ export const calendarShowingMonthState = atom({
 export interface IToDo {
   id: number;
   text: string;
+  isCompleted: boolean;
+  isOnCalendar: boolean;
 }
 
 /* 
