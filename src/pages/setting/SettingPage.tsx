@@ -3,10 +3,11 @@ import { useRecoilState } from 'recoil';
 import { catState } from '../../recoil/catState';
 import { userNameState, userStatusState } from '../../recoil/userInfoState';
 import GrassColorButton from './GrassColorButton';
+import LogoutButton from './LogoutButton';
 import * as S from './SettingPage.styled';
 
 const SettingPage = () => {
-  const [currentCat, setCurrentCat] = useRecoilState(catState);
+  const [currentCat] = useRecoilState(catState);
 
   const [currentName, setCurrentName] = useRecoilState(userNameState);
   const [name, setName] = useState(currentName);
@@ -82,7 +83,7 @@ const SettingPage = () => {
       </S.ChangeWhiteBox>
 
       <S.TwoButtonWrap>
-        <S.LogoutBtn type='submit'>로그아웃</S.LogoutBtn>
+        <LogoutButton />
         <S.DeleteBtn type='submit'>계정삭제</S.DeleteBtn>
       </S.TwoButtonWrap>
     </S.SettingPageContainer>
