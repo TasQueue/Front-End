@@ -17,7 +17,9 @@ function DragabbleCard({ toDo, index, toDoId, dateKeyString }) {
   // 클릭 했음 (클릭 안 한 상태는 따로 처리하지 않음)
   if (clicked) {
     const prevTaskList = [...alltoDos[dateKeyString]]; // 현재 선택된 날짜의 이전 taskList
-    const checkedTask = prevTaskList[index]; // check된 task
+    const prevCheckedTask = prevTaskList[index];
+    const checkedTask = { ...prevCheckedTask, isCompleted: true };
+
     // 클릭 + 체크 => checked task를 가장 뒤로 이동 + 배경색 테마색으로 change
     if (checkState === 'Chekced') {
       prevTaskList.splice(index, 1);
@@ -35,6 +37,7 @@ function DragabbleCard({ toDo, index, toDoId, dateKeyString }) {
         [dateKeyString]: prevTaskList,
       };
     });
+
     setBgColor(checkState === 'Chekced' ? '#c2d9fa' : '#f8f9f9'); // 체크 됬을 때와 안 됬을 때 배경색 설정
     setClicked(false); // 클릭 상태 초기화
     setCheckCnt((prev) => prev + 1); // 체크 횟수 + 1
