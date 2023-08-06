@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import reactCSS from 'reactcss';
 import { ChromePicker } from 'react-color';
+import { useRecoilState } from 'recoil';
+import { userThemeColorState } from '../../recoil/userInfoState';
 
 const GrassColorButton = () => {
+  const [themeColor, setThemeColor] = useRecoilState(userThemeColorState);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const [color, setColor] = useState('#F17013');
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);
@@ -15,7 +17,7 @@ const GrassColorButton = () => {
   };
 
   const handleChange = (pickedColor) => {
-    setColor(pickedColor.hex);
+    setThemeColor(pickedColor.hex);
   };
 
   const handleKeyPress = (e, action) => {
@@ -31,7 +33,7 @@ const GrassColorButton = () => {
         width: '40px',
         height: '40px',
         borderRadius: '50px',
-        background: color,
+        background: themeColor,
       },
       swatch: {
         padding: '1px',
@@ -79,7 +81,7 @@ const GrassColorButton = () => {
             role='button'
             aria-label='color picker overlay'
           />
-          <ChromePicker color={color} onChange={handleChange} />
+          <ChromePicker color={themeColor} onChange={handleChange} />
         </div>
       ) : null}
     </div>

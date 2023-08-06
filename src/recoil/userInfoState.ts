@@ -17,3 +17,8 @@ export const userStatusState = atom({
   key: 'userStatusState',
   default: UserInfo[0].status,
 });
+
+export const userThemeColorState = atom({
+  key: 'userThemeColorState',
+  default: UserInfo[0].themeColor,
+});

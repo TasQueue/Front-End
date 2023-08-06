@@ -7,15 +7,18 @@ import * as S from './SettingPage.styled';
 
 const SettingPage = () => {
   const [currentCat, setCurrentCat] = useRecoilState(catState);
-  const [name, setName] = useRecoilState(userNameState);
-  const [currentName, setCurrentName] = useState('');
-  const [status, setStatus] = useRecoilState(userStatusState);
-  const [currentStatus, setCurrentStatus] = useState('');
+
+  const [currentName, setCurrentName] = useRecoilState(userNameState);
+  const [name, setName] = useState(currentName);
+
+  const [currentStatus, setCurrentStatus] = useRecoilState(userStatusState);
+  const [status, setStatus] = useState(currentStatus);
+
   const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const [initialNameValue, setInitialNameValue] = useState(name);
   const [initialStatusValue, setInitialStatusValue] = useState(status);
-  const [modalMessage, setModalMessage] = useState('');
 
   const handleNameChange = (e) => {
     setName(e.target.value);
