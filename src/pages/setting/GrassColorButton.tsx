@@ -1,32 +1,10 @@
-// import React, { useState } from 'react';
-// import { ChromePicker } from 'react-color';
-
-// const GrassColorButton = () => {
-//   const [color, setColor] = useState('#000');
-
-//   const handleChangeComplete = (color) => {
-//     setColor(color.hex);
-
-//     // document.body.style.backgroundColor = color.hex;
-//   };
-
-//   return <ChromePicker color={color} onChangeComplete={handleChangeComplete} />;
-// };
-
-// export default GrassColorButton;
-
 import React, { useState } from 'react';
 import reactCSS from 'reactcss';
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 
 const GrassColorButton = () => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const [color, setColor] = useState({
-    r: '241',
-    g: '112',
-    b: '19',
-    a: '1',
-  });
+  const [color, setColor] = useState('#F17013');
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);
@@ -37,7 +15,7 @@ const GrassColorButton = () => {
   };
 
   const handleChange = (pickedColor) => {
-    setColor(pickedColor.rgb);
+    setColor(pickedColor.hex);
   };
 
   const handleKeyPress = (e, action) => {
@@ -50,22 +28,24 @@ const GrassColorButton = () => {
   const styles = reactCSS({
     default: {
       color: {
-        width: '36px',
-        height: '14px',
-        borderRadius: '2px',
-        background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+        width: '40px',
+        height: '40px',
+        borderRadius: '50px',
+        background: color,
       },
       swatch: {
-        padding: '5px',
+        padding: '1px',
         background: '#fff',
-        borderRadius: '1px',
-        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+        width: '36px',
+        borderRadius: '50px',
         display: 'inline-block',
         cursor: 'pointer',
       },
       popover: {
         position: 'absolute',
         zIndex: '2',
+        left: '40.8vw',
+        bottom: '9vh',
       },
       cover: {
         position: 'fixed',
@@ -99,7 +79,7 @@ const GrassColorButton = () => {
             role='button'
             aria-label='color picker overlay'
           />
-          <SketchPicker color={color} onChange={handleChange} />
+          <ChromePicker color={color} onChange={handleChange} />
         </div>
       ) : null}
     </div>
