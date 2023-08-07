@@ -5,11 +5,15 @@ export const DeleteCategoryModalBox = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   position: fixed;
-  width: 48vw;
-  height: 55vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 35%;
+  height: 50%;
+  @media (max-width: 1440px) {
+    width: 45%;
+    height: 55%;
+  }
 `;
 // 뒤로 가기 버튼
 export const GoToBack = styled.button.attrs({ type: 'button' })`
@@ -30,7 +34,7 @@ export const Form = styled.form`
   justify-content: flex-start;
   align-items: flex-start;
   width: 85%;
-  height: 80%;
+  height: 90%;
 `;
 // 카테고리 헤더
 export const CategoryHeader = styled.div`
@@ -106,17 +110,14 @@ export const PalleteContainer = styled.div`
 // 색깔 팔레트
 export const Pallete = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   height: 80%;
   width: 75%;
-  background-color: #e0e0e0;
 `;
 
 // 추가하기 버튼
 export const DeleteButton = styled.input.attrs({ type: 'button' })`
-  position: relative;
-  left: 12.5vw;
   background-color: #ff5150;
   color: white;
   width: 7vw;
@@ -124,27 +125,9 @@ export const DeleteButton = styled.input.attrs({ type: 'button' })`
   text-align: center;
   border-radius: 1vw;
   border: none;
+  position: relative;
+  left: 8.3vw;
+  @media (max-width: 1440px) {
+    left: 11.5vw;
+  }
 `;
-
-// 팔레트 컬러
-// 기본 컬러를 이용할라고 했으나 컬러 선택시 배경색이 투과되는 현상이 발생해 직접 색을 정하게 됨
-export const colors = [
-  'red',
-  'pink',
-  'purple',
-  'hotpink',
-  'indigo',
-  'blue',
-  'lightBlue',
-  'cyan',
-  'teal',
-  'green',
-  'lightGreen',
-  'lime',
-  'yellow',
-  'gold',
-  'orange',
-  'peachPuff',
-  'brown',
-  'olive',
-];

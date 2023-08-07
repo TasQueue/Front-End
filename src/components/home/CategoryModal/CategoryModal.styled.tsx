@@ -3,12 +3,16 @@ import styled from 'styled-components';
 export const CategoryModalListBox = styled.div`
   display: flex;
   justify-content: flex-start;
-  width: 48vw;
-  height: 58vh;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 35%;
+  height: 50%;
+  @media (max-width: 1440px) {
+    width: 45%;
+    height: 55%;
+  }
 `;
 export const CategoryContainer = styled.div`
   display: flex;

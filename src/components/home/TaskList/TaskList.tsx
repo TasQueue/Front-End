@@ -11,6 +11,7 @@ import CategoryModal from '../CategoryModal/CategoryModal';
 const TaskList: React.FC = () => {
   const { register, setValue, handleSubmit } = useForm(); // react-hook-form
   const [alltoDos, setAllToDos] = useRecoilState(AlltoDoState);
+  const [isOnCalendar, setIsOnCalendar] = useState(true); // 캘리더 표시 여부
   const selectedDate = useRecoilValue(selectedDateState); // 선택된 날짜 객체
   // AlltoDoState 아톰의 인덱스 서명에 사용될 key 문자열
   const dateKeyString = selectedDate.toDateString();
@@ -42,7 +43,7 @@ const TaskList: React.FC = () => {
       id: Date.now(),
       text: toDo,
       isCompleted: false,
-      isOnCalendar: true,
+      isOnCalendar, // isOnCalendar : isOnCalendar (ES6)
     };
     // 새로운 task를 기존 날짜 별 task에 추가
     setAllToDos((allToDos) => {
@@ -70,19 +71,16 @@ const TaskList: React.FC = () => {
       };
     });
   };
+  // 캘린더 표시 / 미표시 state(isOnCalendar) 제어함수
+  const onCalendar = () => {
+    return isOnCalendar === true ? setIsOnCalendar(false) : setIsOnCalendar(true);
+  };
 
-  // 카테고리 모달 test
+  // 카테고리 모달 test (후에 카테고리 navigation과 연결 예정)
   const [openModal, setOpenModal] = useState(false);
   const closeModal = () => {
-    // console.log('asdf');
     setOpenModal(false);
   };
-  /*
-  const [addCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
-  const openAddCategoryModal = () => {
-    setAddCategoryModalOpen(true);
-  };
-  */
   return (
     <T.TaskListContainer>
       <div>
@@ -90,22 +88,13 @@ const TaskList: React.FC = () => {
           <span>카테고리 모달 테스트</span>
         </button>
         <BasicDialog open={openModal} onClose={closeModal} contentComponent={<CategoryModal onClose={closeModal} />} />
-        {/*
-        {modalOpen && <CategoryModal setModalOpen={setModalOpen} />}
-        */}
-        {/*
-        <button type='button' onClick={openAddCategoryModal}>
-          <span>카테고리 추가 모달 테스트</span>
-        </button>
-        {addCategoryModalOpen && <AddCategory setAddCategoryModalOpen={setAddCategoryModalOpen} />}
-        */}
       </div>
       <T.Header>{headerDateString}</T.Header>
       <T.Form onSubmit={handleSubmit(onVaild as never)}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <input {...register('toDo', { required: true })} type='text' placeholder='태스크 추가' />
-        <button type='button'>
-          <span>캘린더 표시</span>
+        <button type='button' onClick={onCalendar}>
+          {isOnCalendar ? <span>캘린더 표시</span> : <span>캘린더 미표시</span>}
         </button>
         <button type='submit'>
           <span>✚</span>

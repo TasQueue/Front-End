@@ -1,32 +1,34 @@
 import React, { useState } from 'react';
-import { CirclePicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import { useForm } from 'react-hook-form';
 import { categories } from 'recoil/test/atoms';
 import { useRecoilState } from 'recoil';
 import * as D from './DeleteCategory.styled';
 
 interface IForm {
-  title: string;
+  categoryInput: string;
 }
 interface IDeleteCategory {
   clickedColor: string;
   index: number;
-  title: string;
+  CategoryTitle: string;
   onClose: (arg0: boolean) => void;
 }
-const DeleteCategory = ({ clickedColor, index, title, onClose }: IDeleteCategory) => {
-  const { register, setValue, handleSubmit } = useForm<IForm>();
-  const [color, setColor] = React.useState(clickedColor);
-  const [palleteOpen, setPalleteOpen] = useState(false);
-  const [userCategories, setUserCategories] = useRecoilState(categories);
+const DeleteCategory = ({ clickedColor, index, CategoryTitle, onClose }: IDeleteCategory) => {
+  const { register, setValue, handleSubmit } = useForm<IForm>(); // react-hook-form
+  const [color, setColor] = React.useState(clickedColor); // 색갈 state
+  const [palleteOpen, setPalleteOpen] = useState(false); // 팔레트 오픈 state
+  const [userCategories, setUserCategories] = useRecoilState(categories); // 카테고리 아톰 state
   // 팔레트에서 색깔 선택 완료 시 호출되는 함수
   const handleChangeComplete = (color) => {
     setColor(color.hex);
   };
   // 변경된 정보 제출 함수
-  const onVaild = ({ title }: IForm) => {
+  const onVaild = ({ categoryInput }: IForm) => {
+    // 색깔만 변경할 경우 카테고리 값은 빈 문자열이 되므로 아래 코드를 추가
+    const updatedStr = categoryInput !== '' ? categoryInput : CategoryTitle;
     const updatedCategory = {
-      text: title,
+      text: updatedStr,
       color,
     };
     const updatedArray = [...userCategories];
@@ -35,7 +37,7 @@ const DeleteCategory = ({ clickedColor, index, title, onClose }: IDeleteCategory
     setUserCategories(() => {
       return [...updatedArray];
     });
-    setValue('title', title);
+    setValue('categoryInput', categoryInput);
 
     setPalleteOpen(false);
   };
@@ -50,9 +52,7 @@ const DeleteCategory = ({ clickedColor, index, title, onClose }: IDeleteCategory
   // 카테고리 삭제
   const deleteCategory = () => {
     const updatedArray = [...userCategories];
-    // console.log(updatedArray);
     updatedArray.splice(index, 1);
-    // console.log(updatedArray);
     setUserCategories(() => updatedArray);
     alert('정말로 삭제하시겠습니까????'); // eslint-disable-line no-alert
     closeModal();
@@ -64,7 +64,7 @@ const DeleteCategory = ({ clickedColor, index, title, onClose }: IDeleteCategory
       <D.Form onSubmit={handleSubmit(onVaild)}>
         <D.CategoryHeader>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <D.CategoryInput {...register('title', { required: true })} type='text' placeholder={`${title}`} />
+          <D.CategoryInput {...register('categoryInput')} type='text' placeholder={`${CategoryTitle}`} />
           <D.UpdateButton value='변경' />
         </D.CategoryHeader>
         <D.ColorArea>
@@ -78,12 +78,7 @@ const DeleteCategory = ({ clickedColor, index, title, onClose }: IDeleteCategory
           <D.PalleteContainer>
             {palleteOpen && (
               <D.Pallete>
-                <CirclePicker
-                  color={color}
-                  width='270px'
-                  colors={[...D.colors]}
-                  onChangeComplete={handleChangeComplete}
-                />
+                {palleteOpen && <ChromePicker color={color} disableAlpha onChangeComplete={handleChangeComplete} />}
               </D.Pallete>
             )}
           </D.PalleteContainer>

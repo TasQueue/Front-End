@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CirclePicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import { useForm } from 'react-hook-form';
 import { categories } from 'recoil/test/atoms';
 import { useSetRecoilState } from 'recoil';
@@ -12,10 +12,10 @@ interface IAddCategory {
   onClose: (arg0: boolean) => void;
 }
 const AddCategory = ({ onClose }: IAddCategory) => {
-  const { register, setValue, handleSubmit } = useForm<IForm>();
-  const [color, setColor] = React.useState('red');
-  const [palleteOpen, setPalleteOpen] = useState(false);
-  const setUserCategories = useSetRecoilState(categories);
+  const { register, setValue, handleSubmit } = useForm<IForm>(); // // react-hook-form
+  const [color, setColor] = React.useState('red'); // 색갈 state
+  const [palleteOpen, setPalleteOpen] = useState(false); // 팔레트 오픈 state
+  const setUserCategories = useSetRecoilState(categories); // 카테고리 아톰 state
   // 팔레트에서 색깔 선택 완료 시 호출되는 함수
   const handleChangeComplete = (color) => {
     setColor(color.hex);
@@ -40,9 +40,10 @@ const AddCategory = ({ onClose }: IAddCategory) => {
   const openColorModal = () => {
     return palleteOpen === false ? setPalleteOpen(true) : setPalleteOpen(false);
   };
+
   return (
     <A.AddCategoryModalBox>
-      <A.GoToBack onClick={closeModal}>🔙</A.GoToBack>
+      <A.GoToBack onClick={closeModal}>←</A.GoToBack>
       <A.Form onSubmit={handleSubmit(onVaild)}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <A.CategoryInput {...register('title', { required: true })} type='text' placeholder='카테고리를 입력하세요' />
@@ -55,16 +56,7 @@ const AddCategory = ({ onClose }: IAddCategory) => {
             </A.ControlBar>
           </A.ChooseBar>
           <A.PalleteContainer>
-            {palleteOpen && (
-              <A.Pallete>
-                <CirclePicker
-                  color={color}
-                  width='270px'
-                  colors={[...A.colors]}
-                  onChangeComplete={handleChangeComplete}
-                />
-              </A.Pallete>
-            )}
+            {palleteOpen && <ChromePicker color={color} disableAlpha onChangeComplete={handleChangeComplete} />}
           </A.PalleteContainer>
         </A.ColorArea>
         <A.AddButton value='추가하기' />

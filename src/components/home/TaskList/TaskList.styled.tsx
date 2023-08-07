@@ -51,8 +51,8 @@ export const Form = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 15%;
-    height: 20%;
+    width: 18%;
+    height: 23%;
     background-color: #c9c9c9;
     color: whitesmoke;
     border: none;
