@@ -4,6 +4,7 @@ import { catState } from '../../recoil/catState';
 import { userNameState, userStatusState } from '../../recoil/userInfoState';
 import GrassColorButton from './GrassColorButton';
 import LogoutButton from './LogoutButton';
+import AccountDeleteButton from './AccountDeleteButton';
 import * as S from './SettingPage.styled';
 
 const SettingPage = () => {
@@ -84,7 +85,7 @@ const SettingPage = () => {
 
       <S.TwoButtonWrap>
         <LogoutButton />
-        <S.DeleteBtn type='submit'>계정삭제</S.DeleteBtn>
+        <AccountDeleteButton />
       </S.TwoButtonWrap>
     </S.SettingPageContainer>
   );

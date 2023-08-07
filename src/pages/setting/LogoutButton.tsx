@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as L from './LogoutButton.styled';
-import * as S from './SettingPage.styled';
 
 const LogoutButton = () => {
   // 모달창 표시 여부를 관리하는 state 변수
@@ -26,9 +25,9 @@ const LogoutButton = () => {
 
   return (
     <div>
-      <S.LogoutBtn type='submit' onClick={handleLogout}>
+      <L.LogoutBtn type='submit' onClick={handleLogout}>
         로그아웃
-      </S.LogoutBtn>
+      </L.LogoutBtn>
       <L.Modal show={shouldShowModal()}>
         <L.ModalContent>
           <p>로그아웃하시겠습니까?</p>

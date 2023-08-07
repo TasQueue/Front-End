@@ -73,6 +73,10 @@ export const ChangeBtn = styled.button`
   justify-content: center;
   border-radius: 16px;
   margin: 0 0 5vh 0;
+
+  &:hover {
+    background-color: #c2c2c2;
+  }
 `;
 export const Modal = styled.div`
   position: fixed;
@@ -89,26 +93,4 @@ export const TwoButtonWrap = styled.div`
   display: flex;
   height: 10%;
   padding: 12vh 0 0 0;
-`;
-
-export const LogoutBtn = styled.button`
-  background-color: #508bff;
-  color: #ffffff;
-  width: 9vw;
-  height: 4.8vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-  margin: 0 2vw 0 0;
-`;
-export const DeleteBtn = styled.button`
-  background-color: #ff5050;
-  color: #ffffff;
-  width: 9vw;
-  height: 4.8vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
 `;

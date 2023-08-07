@@ -42,9 +42,9 @@ export const YesBtn = styled.button`
   }
 `;
 
-// 로그아웃 버튼 스타일 컴포넌트
-export const LogoutBtn = styled.button`
-  background-color: #508bff;
+// 삭제하기 버튼 스타일 컴포넌트
+export const DeleteBtn = styled.button`
+  background-color: #ff5050;
   color: #ffffff;
   width: 9vw;
   height: 4.8vh;
@@ -52,10 +52,9 @@ export const LogoutBtn = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 16px;
-  margin: 0 2vw 0 0;
 
   &:hover {
-    background-color: #033681;
+    background-color: #922d2d;
     color: #fff;
   }
 `;
