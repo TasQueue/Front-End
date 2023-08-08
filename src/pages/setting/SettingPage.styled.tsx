@@ -46,6 +46,19 @@ export const NameChange = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  transition: font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 `;
 export const StatusChange = styled.textarea`
   width: 30vw;
@@ -59,10 +72,38 @@ export const StatusChange = styled.textarea`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  transition: font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.6rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
-export const GrassChangeLabel = styled.p``;
-// export const GrassColor = styled.div``;
+export const GrassChangeLabel = styled.p`
+  transition:
+    width 0.5s ease,
+    font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
+`;
 
 export const ChangeBtn = styled.button`
   background-color: #d9d9d9;
@@ -73,6 +114,21 @@ export const ChangeBtn = styled.button`
   justify-content: center;
   border-radius: 16px;
   margin: 0 0 5vh 0;
+  transition:
+    width 0.5s ease,
+    font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 
   &:hover {
     background-color: #c2c2c2;

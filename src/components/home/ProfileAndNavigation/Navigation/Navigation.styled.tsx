@@ -30,6 +30,7 @@ export const NavigationWrap = styled.div`
 
 export const NavigationLabel = styled.div`
   font-size: 1.4rem;
+  transition: font-size 0.5s ease;
   @media (max-width: 1024px) {
     font-size: 0.8rem;
   }

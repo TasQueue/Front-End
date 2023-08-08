@@ -18,6 +18,7 @@ export const UserProfileName = styled.div`
   background-repeat: no-repeat;
   margin: 0 0 5px 0;
   padding: 1px 5px;
+  transition: font-size 0.5s ease;
   @media (max-width: 1024px) {
     font-size: 8px;
   }
@@ -37,6 +38,7 @@ export const UserProfileStatus = styled.div`
   width: 6.8vw;
   height: 10vh;
   padding: 1vh 0;
+  transition: font-size 0.5s ease;
 
   @media (max-width: 1024px) {
     font-size: 7px;

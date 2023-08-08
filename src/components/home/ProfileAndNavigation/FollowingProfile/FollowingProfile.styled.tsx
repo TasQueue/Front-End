@@ -34,6 +34,9 @@ export const FriendsName = styled.p`
   font-size: 1.2rem;
   font-weight: 700;
   background-repeat: no-repeat;
+  transition:
+    width 0.5s ease,
+    font-size 0.5s ease;
 
   @media (max-width: 1024px) {
     font-size: 8px;

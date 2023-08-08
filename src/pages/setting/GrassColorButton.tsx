@@ -42,6 +42,7 @@ const GrassColorButton = () => {
         borderRadius: '50px',
         display: 'inline-block',
         cursor: 'pointer',
+        margin: '0 0 0 1vw',
       },
       popover: {
         position: 'absolute',

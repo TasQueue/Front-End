@@ -9,6 +9,22 @@ export const ModalContent = styled.div`
   text-align: center;
   padding: 12rem 0 0 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  transition:
+    width 0.5s ease,
+    font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 export const NoBtn = styled.button`
   background-color: #0066ff;
@@ -20,6 +36,22 @@ export const NoBtn = styled.button`
   justify-content: center;
   border-radius: 16px;
   margin: 0 1vw 0 0;
+
+  transition:
+    width 0.5s ease,
+    font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 
   &:hover {
     background-color: #033681;
@@ -35,6 +67,22 @@ export const YesBtn = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 16px;
+
+  transition:
+    width 0.5s ease,
+    font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 
   &:hover {
     background-color: #922d2d;
@@ -53,6 +101,22 @@ export const LogoutBtn = styled.button`
   justify-content: center;
   border-radius: 16px;
   margin: 0 2vw 0 0;
+
+  transition:
+    width 0.5s ease,
+    font-size 0.5s ease;
+
+  @media (max-width: 1024px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 
   &:hover {
     background-color: #033681;
