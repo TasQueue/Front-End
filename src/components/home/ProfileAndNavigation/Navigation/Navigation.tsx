@@ -9,7 +9,7 @@ const Navigation = () => {
         <N.NavigationIcon src='/assets/images/Navigation-icon/Category3.svg' alt='Category3' />
         <N.NavigationLabel>카테고리</N.NavigationLabel>
       </N.NavigationWrap>
-      <N.NavigationWrap>
+      <N.NavigationWrap as={Link} to='/followManage'>
         <N.NavigationIcon src='/assets/images/Navigation-icon/User-group.svg' alt='User-group' />
         <N.NavigationLabel>사람들</N.NavigationLabel>
       </N.NavigationWrap>
