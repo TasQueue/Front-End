@@ -59,7 +59,7 @@ function DragabbleCard({ toDo, index, toDoId, dateKeyString }) {
             <BasicDialog
               open={openModal}
               onClose={closeModal}
-              contentComponent={<TaskModal onClose={closeModal} id={toDoId} />}
+              contentComponent={<TaskModal onClose={closeModal} taskInfo={{ id: toDoId, dateKeyString }} />}
             />
           </div>
         );

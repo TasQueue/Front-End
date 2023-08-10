@@ -20,7 +20,7 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
         <Checkbox
           label=''
           updatefn={() => {
-            setTempData({ ...tempData, isCompleted: !tempData.isCompleted });
+            return setTempData({ ...tempData, isCompleted: !tempData.isCompleted });
           }}
           checked={tempData.isCompleted}
         />
@@ -46,14 +46,14 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
           <Checkbox
             label='하루종일'
             updatefn={() => {
-              setTempData({ ...tempData, isAllDayTask: !tempData.isAllDayTask });
+              return setTempData({ ...tempData, isAllDayTask: !tempData.isAllDayTask });
             }}
             checked={tempData.isAllDayTask}
           />
           <Checkbox
             label='캘린더 표시'
             updatefn={() => {
-              setTempData({ ...tempData, isOnCalendar: !tempData.isOnCalendar });
+              return setTempData({ ...tempData, isOnCalendar: !tempData.isOnCalendar });
             }}
             checked={tempData.isOnCalendar}
           />

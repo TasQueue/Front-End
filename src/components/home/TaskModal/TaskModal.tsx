@@ -6,15 +6,14 @@ import SelectRepeatModal from './SelectRepeatModal';
 import { AlltoDoState, selectedDateState } from '../../../recoil/test/atoms';
 import { TaskModalState } from '../../../recoil/task/atoms';
 
-const TaskModal = ({ onClose, id }) => {
+const TaskModal = ({ onClose, taskInfo }) => {
   const [isTaskMainModal, setIsTaskMainModal] = useState(true);
   const value = useRecoilValue(AlltoDoState);
-  const originDateValue = useRecoilValue(selectedDateState);
   const [tempData, setTempData] = useRecoilState(TaskModalState);
 
   useEffect(() => {
-    const dateKeyString = originDateValue.toDateString();
-    const originTaskValue = value[dateKeyString].filter((task) => task.id === id)[0];
+    const { dateKeyString } = taskInfo;
+    const originTaskValue = value[dateKeyString].filter((task) => task.id === taskInfo.id)[0];
     /**
      * TODO 현재 다른 곳에서 state를 다 관리하지 않아서 testData 필요. 나중엔 그대로 setTempData(originTaskValue)로 수정할 것
      */
@@ -23,7 +22,7 @@ const TaskModal = ({ onClose, id }) => {
       ...originTaskValue,
     };
     setTempData(testData);
-  }, [id]);
+  }, [taskInfo.id]);
 
   return (
     <T.TaskModalWrapper>
