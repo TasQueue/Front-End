@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as N from './Navigation.styled';
 
 const Navigation = () => {
@@ -16,7 +17,7 @@ const Navigation = () => {
         <N.NavigationIcon src='/assets/images/Navigation-icon/Search.svg' alt='Search' />
         <N.NavigationLabel>검색</N.NavigationLabel>
       </N.NavigationWrap>
-      <N.NavigationWrap>
+      <N.NavigationWrap as={Link} to='/setting'>
         <N.NavigationIcon src='/assets/images/Navigation-icon/Settings.svg' alt='Settings' />
         <N.NavigationLabel>설정</N.NavigationLabel>
       </N.NavigationWrap>

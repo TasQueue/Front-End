@@ -15,10 +15,10 @@ export const UserProfileContainer = styled.section`
 export const UserProfileName = styled.div`
   font-size: 1.45rem;
   font-weight: 1000;
-  background-image: linear-gradient(transparent 50%, rgba(177, 187, 231, 0.5) 50%);
   background-repeat: no-repeat;
   margin: 0 0 5px 0;
-
+  padding: 1px 5px;
+  transition: font-size 0.5s ease;
   @media (max-width: 1024px) {
     font-size: 8px;
   }
@@ -38,6 +38,7 @@ export const UserProfileStatus = styled.div`
   width: 6.8vw;
   height: 10vh;
   padding: 1vh 0;
+  transition: font-size 0.5s ease;
 
   @media (max-width: 1024px) {
     font-size: 7px;
