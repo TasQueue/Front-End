@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 10px 10px;
