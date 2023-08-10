@@ -1,75 +1,87 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useRecoilState } from 'recoil';
 import * as T from './TimeSelect.styled';
 import SelectOption from '../../../common/SelectOption/SelectOption';
 import BasicTextButton from '../../../common/Button/BasicTextButton';
-import { isPossibleToChangeTime, TimeTable } from './utils';
+import {
+  isPossibleToChangeTime,
+  returnTimeListId,
+  returnTimePeriodText,
+  selectHourAndMinute,
+  TimeList,
+  toggleTimePeriod,
+} from './utils';
+import { TaskModalState } from '../../../../recoil/task/atoms';
 
 const TimeSelect = () => {
-  const [timeStartPeriod, setTimeStartPeriod] = useState('오전');
+  const [tempData, setTempData] = useRecoilState(TaskModalState);
+
   const handleStartToggle = () => {
-    if (
-      !isPossibleToChangeTime(
-        timeStartPeriod === '오전' ? '오후' : '오전',
-        defaultStartTimeId,
-        timeEndPeriod,
-        defaultEndTimeId,
-      )
-    ) {
+    const newStartTime = toggleTimePeriod(tempData.startTime);
+    if (!isPossibleToChangeTime(newStartTime, tempData.endTime)) {
       alert('시작시간 < 종료시간 이어야 합니다!!');
       return;
     }
-    setTimeStartPeriod((prevTimePeriod) => (prevTimePeriod === '오전' ? '오후' : '오전'));
+    setTempData({ ...tempData, startTime: newStartTime });
   };
 
-  const [timeEndPeriod, setTimeEndPeriod] = useState('오후');
-
   const handleEndToggle = () => {
-    if (
-      !isPossibleToChangeTime(
-        timeStartPeriod,
-        defaultStartTimeId,
-        timeEndPeriod === '오전' ? '오후' : '오전',
-        defaultEndTimeId,
-      )
-    ) {
+    const newEndTime = toggleTimePeriod(tempData.endTime);
+    if (!isPossibleToChangeTime(tempData.startTime, newEndTime)) {
       alert('시작시간 < 종료시간 이어야 합니다!!');
       return;
     }
-    setTimeEndPeriod((prevTimePeriod) => (prevTimePeriod === '오전' ? '오후' : '오전'));
+    setTempData({ ...tempData, endTime: newEndTime });
   };
 
   const clickStartTime = (value: number) => {
-    if (!isPossibleToChangeTime(timeStartPeriod, value, timeEndPeriod, defaultEndTimeId)) {
+    const newStartTime = selectHourAndMinute(tempData.startTime, value);
+    if (!isPossibleToChangeTime(newStartTime, tempData.endTime)) {
       alert('시작시간 < 종료시간 이어야 합니다!!');
       return;
     }
-    setDefaultStartTimeId(value);
+    setTempData({ ...tempData, startTime: newStartTime });
   };
-  const [defaultStartTimeId, setDefaultStartTimeId] = useState(1);
   const clickEndTime = (value: number) => {
-    if (!isPossibleToChangeTime(timeStartPeriod, defaultStartTimeId, timeEndPeriod, value)) {
+    const newEndTime = selectHourAndMinute(tempData.endTime, value);
+    if (!isPossibleToChangeTime(tempData.startTime, newEndTime)) {
       alert('시작시간 < 종료시간 이어야 합니다!!');
       return;
     }
-    setDefaultEmdTimeId(value);
+    setTempData({ ...tempData, endTime: newEndTime });
   };
-  const [defaultEndTimeId, setDefaultEmdTimeId] = useState(48);
 
   return (
     <T.TimeSelectWrappers>
       <T.TimeSelectWrapper>
         <T.TimeSelectLabel>시작 시간</T.TimeSelectLabel>
         <T.TimeSelectButtons>
-          <BasicTextButton buttonText={timeStartPeriod} buttonColor='black' onClick={handleStartToggle} />
-          <SelectOption optionList={TimeTable} defaultValueId={defaultStartTimeId} onClickItem={clickStartTime} />
+          <BasicTextButton
+            buttonText={returnTimePeriodText(tempData.startTime)}
+            buttonColor='black'
+            onClick={handleStartToggle}
+          />
+          <SelectOption
+            optionList={TimeList}
+            defaultValueId={returnTimeListId(tempData.startTime)}
+            onClickItem={clickStartTime}
+          />
         </T.TimeSelectButtons>
       </T.TimeSelectWrapper>
 
       <T.TimeSelectWrapper>
         <T.TimeSelectLabel>종료 시간</T.TimeSelectLabel>
         <T.TimeSelectButtons>
-          <BasicTextButton buttonText={timeEndPeriod} buttonColor='black' onClick={handleEndToggle} />
-          <SelectOption optionList={TimeTable} defaultValueId={defaultEndTimeId} onClickItem={clickEndTime} />
+          <BasicTextButton
+            buttonText={returnTimePeriodText(tempData.endTime)}
+            buttonColor='black'
+            onClick={handleEndToggle}
+          />
+          <SelectOption
+            optionList={TimeList}
+            defaultValueId={returnTimeListId(tempData.endTime)}
+            onClickItem={clickEndTime}
+          />
         </T.TimeSelectButtons>
       </T.TimeSelectWrapper>
     </T.TimeSelectWrappers>
