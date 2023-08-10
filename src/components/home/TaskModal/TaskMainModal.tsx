@@ -1,11 +1,13 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { useRecoilState } from 'recoil';
+import { useEffect, useState } from 'react';
 import * as T from './TaskMainModal.styled';
 import { Checkbox } from '../../common/Checkbox/Checkbox';
 import CategorySelect from './CategorySelect/CategorySelect';
 import BasicTextButton from '../../common/Button/BasicTextButton';
 import TimeSelect from './TimeSelect/TimeSelect';
 import { TaskModalState } from '../../../recoil/task/atoms';
+import { getTextByKey } from './SelectRepeatModal/utils';
 
 interface TaskMainModalProps {
   onClose: () => void;
@@ -13,6 +15,21 @@ interface TaskMainModalProps {
 }
 const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
   const [tempData, setTempData] = useRecoilState(TaskModalState);
+  const [selectRepeatText, setSelectRepeatText] = useState('');
+
+  useEffect(() => {
+    if (tempData.isRepeatable === 'NO') {
+      setSelectRepeatText('반복 없음');
+    } else if (tempData.isRepeatable === 'ALL_DAY') {
+      setSelectRepeatText('매일 반복');
+    } else {
+      let text = '매주 반복  - ';
+      tempData.dayOfWeek.forEach((day) => {
+        text += `${getTextByKey(day)}, `;
+      });
+      setSelectRepeatText(text.slice(0, -2));
+    }
+  }, [tempData.isRepeatable, tempData.dayOfWeek]);
 
   return (
     <>
@@ -58,7 +75,7 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
             checked={tempData.isOnCalendar}
           />
         </T.CheckBoxesWrapper>
-        <BasicTextButton buttonText='반복 없음' buttonColor='black' onClick={controlStep} />
+        <BasicTextButton buttonText={selectRepeatText} buttonColor='black' onClick={controlStep} />
         <T.TaskModalButton>
           <BasicTextButton
             buttonText='적용하기'
