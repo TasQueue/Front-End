@@ -56,7 +56,11 @@ function DragabbleCard({ toDo, index, toDoId, dateKeyString }) {
             <Card color={bgColor} onClick={() => setOpenModal(true)}>
               <Checkbox label={toDo} updatefn={setClicked} />
             </Card>
-            <BasicDialog open={openModal} onClose={closeModal} contentComponent={<TaskModal onClose={closeModal} />} />
+            <BasicDialog
+              open={openModal}
+              onClose={closeModal}
+              contentComponent={<TaskModal onClose={closeModal} taskInfo={{ id: toDoId, dateKeyString }} />}
+            />
           </div>
         );
       }}
