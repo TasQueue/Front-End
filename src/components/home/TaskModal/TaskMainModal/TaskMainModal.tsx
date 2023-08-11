@@ -1,15 +1,15 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { useRecoilState } from 'recoil';
-import { forwardRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import * as T from './TaskMainModal.styled';
-import { Checkbox } from '../../common/Checkbox/Checkbox';
-import CategorySelect from './CategorySelect/CategorySelect';
-import BasicTextButton from '../../common/Button/BasicTextButton';
-import TimeSelect from './TimeSelect/TimeSelect';
-import { TaskModalState } from '../../../recoil/task/atoms';
-import { getTextByKey } from './SelectRepeatModal/utils';
+import { Checkbox } from '../../../common/Checkbox/Checkbox';
+import CategorySelect from '../CategorySelect/CategorySelect';
+import BasicTextButton from '../../../common/Button/BasicTextButton';
+import TimeSelect from '../TimeSelect/TimeSelect';
+import { TaskModalState } from '../../../../recoil/task/atoms';
+import { getTextByKey } from '../SelectRepeatModal/utils';
 import 'react-datepicker/dist/react-datepicker.css';
 import { DatePickerWrapper } from './TaskMainModal.styled';
 import { formatDateByDash } from './utils';
@@ -98,7 +98,8 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
             buttonColor='#0066FF'
             onClick={() => {
               console.log('적용하기');
-              onClose();
+              console.log(tempData);
+              // onClose();
             }}
           />
           <BasicTextButton

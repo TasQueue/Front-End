@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import * as T from './TaskModal.styled';
-import TaskMainModal from './TaskMainModal';
+import TaskMainModal from './TaskMainModal/TaskMainModal';
 import SelectRepeatModal from './SelectRepeatModal/SelectRepeatModal';
 import { AlltoDoState } from '../../../recoil/test/atoms';
 import { TaskModalState } from '../../../recoil/task/atoms';
