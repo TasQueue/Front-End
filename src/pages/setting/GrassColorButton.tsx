@@ -45,13 +45,13 @@ const GrassColorButton = () => {
         margin: '0 0 0 1vw',
       },
       popover: {
-        position: 'absolute',
+        position: 'absolute' as const,
         zIndex: '2',
         left: '40.8vw',
         bottom: '9vh',
       },
       cover: {
-        position: 'fixed',
+        position: 'fixed' as const,
         top: '0px',
         right: '0px',
         bottom: '0px',
