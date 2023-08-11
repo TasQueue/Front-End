@@ -8,11 +8,10 @@ interface ITaskModalState {
   startTime: string;
   endTime: string;
   dayOfWeek: string[];
-  priority: number;
   isCompleted: boolean;
   isOnCalendar: boolean;
   isAllDayTask: boolean;
-  isRepeatable: boolean;
+  isRepeatable: 'NO' | 'ALL_DAY' | 'SOME_DAY'; // 반복없음, 매일, 매주
 }
 
 export const TaskModalState = atom<ITaskModalState>({
@@ -24,10 +23,9 @@ export const TaskModalState = atom<ITaskModalState>({
     startTime: '2022-01-01 00:00:00',
     endTime: '2022-01-01 23:45:00',
     dayOfWeek: [],
-    priority: 0,
     isAllDayTask: true,
     isOnCalendar: true,
-    isRepeatable: false,
+    isRepeatable: 'NO',
     isCompleted: false,
   },
 });
