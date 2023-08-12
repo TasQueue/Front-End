@@ -76,19 +76,22 @@ const TaskList: React.FC = () => {
     return isOnCalendar === true ? setIsOnCalendar(false) : setIsOnCalendar(true);
   };
 
-  // 카테고리 모달 test (후에 카테고리 navigation과 연결 예정)
+  /* 카테고리 모달 test (후에 카테고리 navigation과 연결 예정)
   const [openModal, setOpenModal] = useState(false);
   const closeModal = () => {
     setOpenModal(false);
   };
+  */
   return (
     <T.TaskListContainer>
+      {/*
       <div>
         <button type='button' onClick={() => setOpenModal(true)}>
           <span>카테고리 모달 테스트</span>
         </button>
         <BasicDialog open={openModal} onClose={closeModal} contentComponent={<CategoryModal onClose={closeModal} />} />
       </div>
+      */}
       <T.Header>{headerDateString}</T.Header>
       <T.Form onSubmit={handleSubmit(onVaild as never)}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}

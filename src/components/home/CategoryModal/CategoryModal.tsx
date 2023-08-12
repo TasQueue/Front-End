@@ -24,7 +24,7 @@ const CategoryModal = ({ onClose }) => {
   };
   // 카테고리 메인 모달을 닫는 함수
   const closeModal = () => {
-    onClose();
+    return onClose();
   };
   // TitleCard를 클릭하면 추가하기 모달이 열린다.
   // ElementCard를 클릭하면 삭제하기 모달이 열린다.
