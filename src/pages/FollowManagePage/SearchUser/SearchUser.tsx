@@ -38,7 +38,6 @@ const SearchUser = () => {
     if (filteredUsers.length > 0) {
       setFoundUsers(filteredUsers);
     } else {
-      alert('사용자를 찾을 수 없습니다.');
       setFoundUsers([]);
     }
   };
