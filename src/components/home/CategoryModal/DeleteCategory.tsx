@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { useForm } from 'react-hook-form';
-import { categories } from 'recoil/test/atoms';
+import { categoryList } from 'recoil/test/atoms';
 import { useRecoilState } from 'recoil';
 import * as D from './DeleteCategory.styled';
 
@@ -18,7 +18,7 @@ const DeleteCategory = ({ clickedColor, index, CategoryTitle, onClose }: IDelete
   const { register, setValue, handleSubmit } = useForm<IForm>(); // react-hook-form
   const [color, setColor] = React.useState(clickedColor); // 색갈 state
   const [palleteOpen, setPalleteOpen] = useState(false); // 팔레트 오픈 state
-  const [userCategories, setUserCategories] = useRecoilState(categories); // 카테고리 아톰 state
+  const [userCategories, setUserCategories] = useRecoilState(categoryList); // 카테고리 아톰 state
   // 팔레트에서 색깔 선택 완료 시 호출되는 함수
   const handleChangeComplete = (color) => {
     setColor(color.hex);
@@ -28,7 +28,8 @@ const DeleteCategory = ({ clickedColor, index, CategoryTitle, onClose }: IDelete
     // 색깔만 변경할 경우 카테고리 값은 빈 문자열이 되므로 아래 코드를 추가
     const updatedStr = categoryInput !== '' ? categoryInput : CategoryTitle;
     const updatedCategory = {
-      text: updatedStr,
+      id: Date.now(),
+      name: updatedStr,
       color,
     };
     const updatedArray = [...userCategories];

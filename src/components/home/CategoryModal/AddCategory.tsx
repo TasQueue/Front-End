@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { useForm } from 'react-hook-form';
-import { categories } from 'recoil/test/atoms';
+import { categoryList } from 'recoil/test/atoms';
 import { useSetRecoilState } from 'recoil';
 import * as A from './AddCategory.styled';
 
@@ -15,7 +15,7 @@ const AddCategory = ({ onClose }: IAddCategory) => {
   const { register, setValue, handleSubmit } = useForm<IForm>(); // // react-hook-form
   const [color, setColor] = React.useState('red'); // 색갈 state
   const [palleteOpen, setPalleteOpen] = useState(false); // 팔레트 오픈 state
-  const setUserCategories = useSetRecoilState(categories); // 카테고리 아톰 state
+  const setUserCategories = useSetRecoilState(categoryList); // 카테고리 아톰 state
   // 팔레트에서 색깔 선택 완료 시 호출되는 함수
   const handleChangeComplete = (color) => {
     setColor(color.hex);
@@ -23,7 +23,8 @@ const AddCategory = ({ onClose }: IAddCategory) => {
   // 폼 제출
   const onVaild = ({ title }: IForm) => {
     const newCategory = {
-      text: title,
+      id: Date.now(),
+      name: title,
       color,
     };
     setUserCategories((oldCategories) => {

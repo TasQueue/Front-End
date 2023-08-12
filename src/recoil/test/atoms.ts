@@ -40,11 +40,11 @@ export const AlltoDoState = atom<IToDoState>({
 
 // 카테고리 인터페이스
 export interface Icategory {
-  text: string; // 카테고리명
+  id: number; // id
+  name: string; // 카테고리명
   color: string; // 색깔
-  // id 필요시 추가
 }
-export const categories = atom<Icategory[]>({
+export const categoryList = atom<Icategory[]>({
   key: 'category',
   default: [],
 });
