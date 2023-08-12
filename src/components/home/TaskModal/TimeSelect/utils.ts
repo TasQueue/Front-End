@@ -54,51 +54,48 @@ export function isPossibleToChangeTime(startTime: string, endTime: string) {
 }
 
 /**
- * '2022-01-01 12:00:00' 형식의 문자열을 입력받아, 오전 오후를 판단하여 텍스트 반환
- * @param timeString '2022-01-01 12:00:00' 형식의 문자열
+ * '12:00:00' 형식의 문자열을 입력받아, 오전 오후를 판단하여 텍스트 반환
+ * @param timeString '12:00:00' 형식의 문자열
  */
 export function returnTimePeriodText(timeString: string) {
-  const hour = Number(timeString.split(' ')[1].split(':')[0]);
+  const hour = Number(timeString.split(':')[0]);
   return hour <= 11 ? '오전' : '오후';
 }
 
 /**
- * '2022-01-01 12:00:00' 형식의 문자열을 입력받아, 이 중 시간 부분만 수정
+ * '12:00:00' 형식의 문자열을 입력받아, 이 중 시간 부분만 수정
  * 10 -> 22, 23 -> 11 과 같이 오전 오후를 바꾸고 다시 입력받은 형식대로 반환
- * @param timeString '2022-01-01 12:00:00' 형식의 문자열
+ * @param timeString '12:00:00' 형식의 문자열
  */
 export function toggleTimePeriod(timeString: string) {
-  const [date, time] = timeString.split(' ');
-  const [hour, minute, second] = time.split(':');
+  const [hour, minute, second] = timeString.split(':');
   const newHour = (Number(hour) + 12) % 24;
-  return `${date} ${String(newHour).padStart(2, '0')}:${minute}:${second}`;
+  return `${String(newHour).padStart(2, '0')}:${minute}:${second}`;
 }
 
 /**
- * '2022-01-01 12:00:00' 형식의 문자열을 입력받아, 'hour:minute' 부분에 해당하는 id를 반환
- * @param timeString '2022-01-01 12:00:00' 형식의 문자열
+ * '12:00:00' 형식의 문자열을 입력받아, 'hour:minute' 부분에 해당하는 id를 반환
+ * @param timeString '12:00:00' 형식의 문자열
  */
 export function returnTimeListId(timeString: string) {
-  const [date, time] = timeString.split(' ');
-  const [hour, minute, second] = time.split(':');
+  const [hour, minute, second] = timeString.split(':');
 
   const id = (Number(hour) % 12) * 4 + Number(minute) / 15;
   return id;
 }
 
 /**
- * HourAndMinuteId에 해당하는 시간으로 세팅하여 '2022-01-01 12:00:00'형식으로 반환
- * @param timeString '2022-01-01 12:00:00' 형식의 문자열
+ * HourAndMinuteId에 해당하는 시간으로 세팅하여 '12:00:00'형식으로 반환
+ * @param timeString '12:00:00' 형식의 문자열
  * @param HourAndMinuteId TimeTable의 id값
  */
 export function selectHourAndMinute(timeString: string, HourAndMinuteId: number) {
-  const [date, time] = timeString.split(' ');
-  const [hour, minute, second] = time.split(':');
+  const [hour, minute, second] = timeString.split(':');
 
   let newHourAndMinute = TimeList[HourAndMinuteId].text; // 00:00 ~ 11:45
   if (Number(hour) >= 12) {
     const [newHour, newMinute] = newHourAndMinute.split(':');
     newHourAndMinute = `${Number(newHour) + 12}:${newMinute}`;
   }
-  return `${date} ${newHourAndMinute}:${second}`;
+  return `${newHourAndMinute}:${second}`;
 }

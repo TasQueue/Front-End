@@ -1,13 +1,18 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import { ko } from 'date-fns/esm/locale';
 import * as T from './TaskMainModal.styled';
-import { Checkbox } from '../../common/Checkbox/Checkbox';
-import CategorySelect from './CategorySelect/CategorySelect';
-import BasicTextButton from '../../common/Button/BasicTextButton';
-import TimeSelect from './TimeSelect/TimeSelect';
-import { TaskModalState } from '../../../recoil/task/atoms';
-import { getTextByKey } from './SelectRepeatModal/utils';
+import { Checkbox } from '../../../common/Checkbox/Checkbox';
+import CategorySelect from '../CategorySelect/CategorySelect';
+import BasicTextButton from '../../../common/Button/BasicTextButton';
+import TimeSelect from '../TimeSelect/TimeSelect';
+import { TaskModalState } from '../../../../recoil/task/atoms';
+import { getTextByKey } from '../SelectRepeatModal/utils';
+import 'react-datepicker/dist/react-datepicker.css';
+import { DatePickerWrapper } from './TaskMainModal.styled';
+import { formatDateByDash } from './utils';
 
 interface TaskMainModalProps {
   onClose: () => void;
@@ -16,6 +21,13 @@ interface TaskMainModalProps {
 const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
   const [tempData, setTempData] = useRecoilState(TaskModalState);
   const [selectRepeatText, setSelectRepeatText] = useState('');
+
+  const [selectedDate, setSelectedDate] = useState(new Date(tempData.date));
+
+  const handleSelectedDate = (date) => {
+    setSelectedDate(date);
+    setTempData({ ...tempData, date: formatDateByDash(date) });
+  };
 
   useEffect(() => {
     if (tempData.isRepeatable === 'NO') {
@@ -51,12 +63,16 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
       <T.TaskModalContent>
         <T.TaskCategoryAndDate>
           <CategorySelect />
-          {/* TODO 날짜 선택 기능 구현하기 */}
-          <BasicTextButton
-            buttonText='2023.7.14'
-            buttonColor='black'
-            onClick={() => alert('TODO: 날짜 선택 기능 만들기')}
-          />
+          <DatePickerWrapper>
+            <DatePicker
+              locale={ko}
+              dateFormat='yyyy.MM.dd'
+              onChange={(date) => handleSelectedDate(date)}
+              selected={selectedDate}
+              shouldCloseOnSelect
+              className='datePickerInput'
+            />
+          </DatePickerWrapper>
         </T.TaskCategoryAndDate>
         {!tempData.isAllDayTask && <TimeSelect />}
         <T.CheckBoxesWrapper>
@@ -82,7 +98,8 @@ const TaskMainModal = ({ onClose, controlStep }: TaskMainModalProps) => {
             buttonColor='#0066FF'
             onClick={() => {
               console.log('적용하기');
-              onClose();
+              console.log(tempData);
+              // onClose();
             }}
           />
           <BasicTextButton
