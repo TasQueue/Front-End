@@ -56,3 +56,22 @@ export const CheckBoxesWrapper = styled.div`
     place-self: center;
   }
 `;
+
+export const DatePickerWrapper = styled.div`
+  .react-datepicker {
+    box-shadow: 3px 2px 11px rgb(0 0 0 / 30%);
+  }
+
+  .datePickerInput {
+    width: 150px;
+    padding: 5px 13px;
+    font-size: 2.5rem;
+    background: black;
+    color: white;
+    border-radius: 13px;
+    border: none;
+  }
+  .datePickerInput:focus {
+    outline: none;
+  }
+`;
