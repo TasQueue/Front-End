@@ -43,6 +43,12 @@ const SearchUser = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      userSearch();
+    }
+  };
+
   return (
     <div>
       <S.Label>사용자 찾기.</S.Label>
@@ -51,6 +57,7 @@ const SearchUser = () => {
           type='text'
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
+          onKeyPress={handleKeyPress}
           placeholder='사용자 이름을 검색하세요.'
         />
         <S.SearchBtn onClick={userSearch}>
@@ -58,10 +65,10 @@ const SearchUser = () => {
         </S.SearchBtn>
       </S.SearchWrap>
       {foundUsers.map((user) => (
-        <div key={user.name}>
-          <p>{user.name}</p>
-          <img src={getImagePath(user.cat)} alt={`${user.name}의 이미지`} />
-        </div>
+        <S.foundUsersWrap key={user.name}>
+          <S.foundUsersCat src={getImagePath(user.cat)} alt={`${user.name}의 이미지`} />
+          <S.foundUsersName>{user.name}</S.foundUsersName>
+        </S.foundUsersWrap>
       ))}
     </div>
   );
