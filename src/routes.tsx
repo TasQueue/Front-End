@@ -12,8 +12,7 @@ const AppRouter: React.FC = () => {
         <Route path='/' Component={Home} />
         <Route path='/followManage' Component={FollowManage} />
         <Route path='/setting' Component={Setting} />
-        {/* TODO /auth 수정할 것 */}
-        <Route path='/auth' Component={KakaoLogin} />
+        <Route path='/login/oauth2/code/kakao' Component={KakaoLogin} />
       </Routes>
     </Router>
   );
