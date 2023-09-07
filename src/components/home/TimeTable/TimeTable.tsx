@@ -1,6 +1,7 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react';
 import { differenceInDays, differenceInMinutes, isBefore, setHours, setMinutes } from 'date-fns';
 import { syncDate } from 'utils/syncDate';
+import { useUserQuery } from 'hooks/queries/useUserQuery';
 import * as T from './TimeTable.styled';
 import { DUMMY_TASKS, Task } from './dummyTask';
 import splitTextIntoChunks from '../../../utils/splitTextIntoChunks';
@@ -197,6 +198,7 @@ const timeTableUiTools = {
 };
 
 const TimeTable = () => {
+  const { user } = useUserQuery();
   const [tasks, setTasks] = useState<Task[]>(DUMMY_TASKS);
   const [draggingTask, setDraggingTask] = useState<DraggingTask | null>(null);
   const canvas: RefObject<HTMLCanvasElement> = useRef<HTMLCanvasElement>(null);
