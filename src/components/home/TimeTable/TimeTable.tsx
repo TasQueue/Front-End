@@ -3,6 +3,7 @@ import { differenceInDays, differenceInMinutes, isBefore, setHours, setMinutes }
 import { syncDate } from 'utils/syncDate';
 import * as T from './TimeTable.styled';
 import { DUMMY_TASKS, Task } from './dummyTask';
+import splitTextIntoChunks from '../../../utils/splitTextIntoChunks';
 
 interface DraggingTask extends Task {
   leftTopX: number;
@@ -30,9 +31,9 @@ function adjustInRange(x: number, min: number, max: number) {
 const timeTableConfigs = {
   padding: 5, // 상하좌우 padding
   lineWidth: 1, // Line 사이즈
-  bgColor: '#eeb2b2', // 배경색
+  bgColor: '#ffffff', // 배경색
   // lineColor: 'rgba(235, 235, 235, 1)', // Line 색
-  lineColor: '#0d0c0c', // Line 색
+  lineColor: '#d9d9d9', // Line 색
   startHour: 8, // 시작 시간
   endHour: 18, // 끝 시간
   getLineGap: (canvasWidth: number) => {
@@ -165,6 +166,17 @@ const timeTableUiTools = {
       // }
       ctx.fillStyle = task.color;
       ctx.fillRect(x, y, width, height);
+
+      // 텍스트 그리기
+      const words = splitTextIntoChunks(task.name, 4);
+      // words.forEach(word => {
+
+      // })
+      ctx.fillStyle = 'white';
+      const textWidth = ctx.measureText(task.name).width;
+      const textX = x + (width - textWidth) / 2;
+      const textY = y + height / 2;
+      ctx.fillText(task.name, textX, textY);
       // ctx.strokeStyle = task.color;
       // ctx.beginPath();
       // ctx.roundRect(x, y, width, height, [8]);

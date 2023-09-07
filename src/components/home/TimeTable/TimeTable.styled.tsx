@@ -6,7 +6,7 @@ export const Container = styled.section`
   opacity: 0.8;
   margin: 1.4286vh 0;
   padding: 14px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 24px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
