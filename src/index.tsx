@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { theme } from 'config/theme';
 import { GlobalStyle } from 'styles/globalStyle';
 import { RecoilRoot } from 'recoil';
@@ -8,11 +9,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0, refetchOnWindowFocus: false } } });
 root.render(
   <ThemeProvider theme={theme}>
     <RecoilRoot>
-      <GlobalStyle />
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
+        <App />
+      </QueryClientProvider>
     </RecoilRoot>
   </ThemeProvider>,
 );
