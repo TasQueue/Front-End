@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import * as Y from './YourFollowing.styled';
 
 // 사용자 정보 타입 정의
@@ -37,15 +36,13 @@ const getImagePath = (cat: string) => {
 };
 
 const YourFollowing = () => {
-  const [value, setValue] = useState('');
-  const [users, setUsers] = useState(mockUsers);
   return (
     <Y.Conatiner>
       <Y.Header>
         <Y.Title>Following</Y.Title>
       </Y.Header>
       <Y.Elements>
-        {users.map((user) => {
+        {mockUsers.map((user) => {
           return (
             <Y.Element key={user.name}>
               <Y.UsersCat src={getImagePath(user.cat)} alt={`${user.name}의 이미지`} />

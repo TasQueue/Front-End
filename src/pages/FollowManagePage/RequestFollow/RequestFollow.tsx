@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import * as R from './RequestFollow.styled';
 
 // 사용자 정보 타입 정의
@@ -37,15 +36,13 @@ const getImagePath = (cat: string) => {
 };
 
 const RequestFollow = () => {
-  const [value, setValue] = useState('');
-  const [users, setUsers] = useState(mockUsers);
   return (
     <R.Conatiner>
       <R.Header>
         <R.Title>Request</R.Title>
       </R.Header>
       <R.Elements>
-        {users.map((user) => {
+        {mockUsers.map((user) => {
           return (
             <R.Element key={user.name}>
               <R.UsersCat src={getImagePath(user.cat)} alt={`${user.name}의 이미지`} />
