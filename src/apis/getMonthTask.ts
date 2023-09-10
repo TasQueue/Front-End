@@ -3,7 +3,7 @@ import { authToken } from 'class/authToken';
 import { CatState } from 'types/catState';
 import customAxios from './customAxios';
 
-type MyInfoResponse = {
+type MonthTaskResponse = {
   id: number;
   name: string;
   intro: string;
@@ -11,7 +11,7 @@ type MyInfoResponse = {
 };
 
 export function getMyInfo() {
-  return customAxios.get<MyInfoResponse>('/users/my-info', {
+  return customAxios.get<MonthTaskResponse>('/users/8/update/month?month=2023-09-01', {
     headers: {
       Authorization: `Bearer ${window.localStorage.getItem('userAccessToken')}`,
     },

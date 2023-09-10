@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import * as C from './Calendar.styled';
 import CalendarBody from './CalendarBody/CalendarBody';
