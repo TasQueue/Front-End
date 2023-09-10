@@ -12,7 +12,6 @@ export function useUserQuery() {
     queryKey: USER_QUERY_KEY,
     queryFn: getMyInfo,
     select: (res) => res.data,
-    // staleTime: 1000 * 20, // 20초 동안 유효한 데이터
   });
 
   return { user, isLoading, isError };
