@@ -10,7 +10,6 @@ interface ownProps {
 }
 
 const CalendarTaskLabel: React.FC<ownProps> = ({ toDoId, toDo, index }) => {
-  const ID = toDoId;
   return (
     <Draggable key={toDoId} draggableId={toDoId.toString()} index={index}>
       {(provided) => (

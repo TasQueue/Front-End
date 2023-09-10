@@ -14,6 +14,8 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
+import { MonthTasksResponse, useMonthTasksQuery } from 'hooks/queries/useMonthTasksQuery';
+import { useUserQuery } from 'hooks/queries/useUserQuery';
 import * as C from './CalendarBody.styled';
 import CalendarBodyCell from './CalendarBodyCell';
 
@@ -24,8 +26,21 @@ const CalendarBody = () => {
   const [monthEnd, setMonthEnd] = useState(endOfMonth(currentMonth));
   const [calendarStartDate, setCalendarStartDate] = useState(startOfWeek(monthStart));
   const [calendarEndDate, setCalendarEndDate] = useState(endOfWeek(monthEnd));
-  const formattedDate = format(selectedDate, 'yyyy년 MM월 dd일');
   const [alltoDos, setAllToDos] = useRecoilState(AlltoDoState);
+
+  const { user } = useUserQuery();
+  const [toDoData, setToDoData] = useState<MonthTasksResponse>();
+  const userId = window.localStorage.getItem('userId') || '';
+
+  const { tasks, isLoading, isSuccess } = useMonthTasksQuery({ month: format(monthStart, 'yyyy-MM-dd'), userId });
+
+  useEffect(() => {
+    if (isSuccess && tasks) {
+      console.log('성공했습니다!');
+      console.log(tasks);
+      setToDoData(tasks);
+    }
+  }, [isSuccess, tasks]);
 
   useEffect(() => {
     setMonthStart(startOfMonth(currentMonth));
@@ -54,6 +69,16 @@ const CalendarBody = () => {
   };
   const isSelectedDate = (cellDate) => {
     return isSameDay(selectedDate, cellDate);
+  };
+
+  const dailyTask = (date) => {
+    const formattedDate = format(date, 'yyyy-MM-dd');
+
+    return (
+      toDoData?.taskList.filter((item) => {
+        return item.dayList.some((date) => date.includes(formattedDate));
+      }) || []
+    );
   };
 
   const onDragEndHandler = (result) => {
@@ -97,6 +122,7 @@ const CalendarBody = () => {
             data={d}
             changeSelectedDate={changeSelectedDate}
             isSelectedDate={isSelectedDate(d)}
+            dailyTask={dailyTask(d)}
           />
         ))}
       </DragDropContext>

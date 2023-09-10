@@ -6,21 +6,36 @@ import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautif
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { AlltoDoState, selectedDateState } from 'recoil/test/atoms';
 import tinycolor from 'tinycolor2';
+import { useUserQuery } from 'hooks/queries/useUserQuery';
+import { useMonthTasksQuery } from 'hooks/queries/useMonthTasksQuery';
+import { MonthTasksResponse } from 'hooks/queries/useMonthTasksQuery';
 import * as C from './CalendarBodyCell.styled';
 import CalendarTaskLabel from './CalendarTaskLabel';
+
+type DailyTask = {
+  id: number;
+  dayList: string[];
+  startTime: string;
+  endTime: string;
+  name: string;
+  repeatState: 'YES' | 'NO';
+  requiredTime: boolean;
+};
 
 interface ownProps {
   data: Date;
   changeSelectedDate: (data: Date) => void;
   isSelectedDate: boolean;
   index: number;
+  dailyTask: DailyTask[];
 }
 
-const CalendarBodyCell: React.FC<ownProps> = ({ data, changeSelectedDate, isSelectedDate }) => {
+const CalendarBodyCell: React.FC<ownProps> = ({ data, changeSelectedDate, isSelectedDate, dailyTask }) => {
   const [alltoDos, setAllToDos] = useRecoilState(AlltoDoState);
   const [selectedDate, setSelectedDate] = useRecoilState(selectedDateState);
   const [backgroundOpacityRatioState, setBackgroundOpacityRatioState] = useState<number>(0);
   const color = tinycolor('#C2D9FA');
+
   const rgbObj = color.toRgb();
   useEffect(() => {
     setBackgroundOpacityRatioState(
@@ -43,12 +58,10 @@ const CalendarBodyCell: React.FC<ownProps> = ({ data, changeSelectedDate, isSele
             rgbObj={rgbObj}
           >
             <C.DateLabel>{data.getDate()} </C.DateLabel>
-            {alltoDos[data.toDateString()]
-              ?.slice(0, 3)
-              .map((toDo, index) => (
-                <CalendarTaskLabel key={toDo.id} index={index} toDoId={toDo.id} toDo={toDo.text} />
-              ))}
-            {alltoDos[data.toDateString()]?.length > 3 ? <>{`+${alltoDos[data.toDateString()].length - 3}`}</> : null}
+            {dailyTask.map((toDo) => (
+              <CalendarTaskLabel key={toDo.id} index={toDo.id} toDoId={toDo.id} toDo={toDo.name} />
+            ))}
+            {dailyTask.length > 3 ? <>{`+${alltoDos[data.toDateString()].length - 3}`}</> : null}
           </C.CalendarBodyCellContainer>
           {provided.placeholder}
         </div>

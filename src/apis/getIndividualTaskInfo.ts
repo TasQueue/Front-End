@@ -25,7 +25,7 @@ type IndividualTaskInfoResponse = {
 export function getIndividualTaskInfo(taskId: number) {
   return customAxios.get<IndividualTaskInfoResponse>(`/tasks/${taskId}`, {
     headers: {
-      Authorization: `Bearer ${authToken.getToken()}`,
+      Authorization: `Bearer ${window.localStorage.getItem('userAccessToken')}`,
     },
   });
 }
