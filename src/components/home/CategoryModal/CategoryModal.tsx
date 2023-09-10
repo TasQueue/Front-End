@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { categories } from 'recoil/test/atoms';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import BasicDialog from 'components/common/Dialog/BasicDialog';
+import axios from 'axios';
+import { useGetCategories } from 'hooks/queries/category/useGetCategories';
+import { authToken } from 'class/authToken';
 import * as C from './CategoryModal.styled';
 import AddCategory from './AddCategory';
 import DeleteCategory from './DeleteCategory';
-
 // 카테고리 메인 모달
 const CategoryModal = ({ onClose }) => {
   const userCategories = useRecoilValue(categories); // 카테고리 아톰 값
+  const setCategories = useSetRecoilState(categories);
   const [openAddModal, setOpenAddModal] = useState(false); // 추가하기 모달 열기 state
   const [openDeleteModal, setOpenDeleteModal] = useState(false); // 삭제하기 모달 열기 state
   const [clickedTitle, setClickedTitle] = useState(''); // 클릭된 카테고리의 카테고리 이름 state
@@ -28,6 +31,15 @@ const CategoryModal = ({ onClose }) => {
   };
   // TitleCard를 클릭하면 추가하기 모달이 열린다.
   // ElementCard를 클릭하면 삭제하기 모달이 열린다.
+
+  // API getCategories
+  const { data, isLoading, isError, isSuccess } = useGetCategories();
+
+  try {
+    setCategories(data.categoryList);
+  } catch (error) {
+    return <div>Loding</div>;
+  }
   return (
     <C.CategoryModalListBox>
       <C.CategoryContainer>
@@ -36,16 +48,16 @@ const CategoryModal = ({ onClose }) => {
           {userCategories.map((value, index) => {
             return (
               <C.ElementCard
-                key={value.text}
+                key={value.name}
                 color={value.color}
                 onClick={() => {
-                  setClickedTitle(value.text);
+                  setClickedTitle(value.name);
                   setClickedIndex(index);
                   setClickedColor(value.color);
                   setOpenDeleteModal(true);
                 }}
               >
-                {value.text}
+                {value.name}
               </C.ElementCard>
             );
           })}

@@ -28,7 +28,8 @@ const DeleteCategory = ({ clickedColor, index, CategoryTitle, onClose }: IDelete
     // 색깔만 변경할 경우 카테고리 값은 빈 문자열이 되므로 아래 코드를 추가
     const updatedStr = categoryInput !== '' ? categoryInput : CategoryTitle;
     const updatedCategory = {
-      text: updatedStr,
+      id: Date.now(),
+      name: updatedStr,
       color,
     };
     const updatedArray = [...userCategories];

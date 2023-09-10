@@ -16,7 +16,7 @@ const KakaoLogin = () => {
       navigate('/home');
     });
   }, []);
-
+  console.log(authToken.getToken());
   return <div>로그인 중입니다.</div>;
 };
 
