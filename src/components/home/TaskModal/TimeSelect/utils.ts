@@ -63,39 +63,39 @@ export function returnTimePeriodText(timeString: string) {
 }
 
 /**
- * '12:00:00' 형식의 문자열을 입력받아, 이 중 시간 부분만 수정
+ * '12:00' 형식의 문자열을 입력받아, 이 중 시간 부분만 수정
  * 10 -> 22, 23 -> 11 과 같이 오전 오후를 바꾸고 다시 입력받은 형식대로 반환
- * @param timeString '12:00:00' 형식의 문자열
+ * @param timeString '12:00' 형식의 문자열
  */
 export function toggleTimePeriod(timeString: string) {
-  const [hour, minute, second] = timeString.split(':');
+  const [hour, minute] = timeString.split(':');
   const newHour = (Number(hour) + 12) % 24;
-  return `${String(newHour).padStart(2, '0')}:${minute}:${second}`;
+  return `${String(newHour).padStart(2, '0')}:${minute}`;
 }
 
 /**
- * '12:00:00' 형식의 문자열을 입력받아, 'hour:minute' 부분에 해당하는 id를 반환
- * @param timeString '12:00:00' 형식의 문자열
+ * '12:00' 형식의 문자열을 입력받아, 'hour:minute' 부분에 해당하는 id를 반환
+ * @param timeString '12:00' 형식의 문자열
  */
 export function returnTimeListId(timeString: string) {
-  const [hour, minute, second] = timeString.split(':');
+  const [hour, minute] = timeString.split(':');
 
   const id = (Number(hour) % 12) * 4 + Number(minute) / 15;
   return id;
 }
 
 /**
- * HourAndMinuteId에 해당하는 시간으로 세팅하여 '12:00:00'형식으로 반환
- * @param timeString '12:00:00' 형식의 문자열
+ * HourAndMinuteId에 해당하는 시간으로 세팅하여 '12:00'형식으로 반환
+ * @param timeString '12:00' 형식의 문자열
  * @param HourAndMinuteId TimeTable의 id값
  */
 export function selectHourAndMinute(timeString: string, HourAndMinuteId: number) {
-  const [hour, minute, second] = timeString.split(':');
+  const [hour, minute] = timeString.split(':');
 
   let newHourAndMinute = TimeList[HourAndMinuteId].text; // 00:00 ~ 11:45
   if (Number(hour) >= 12) {
     const [newHour, newMinute] = newHourAndMinute.split(':');
     newHourAndMinute = `${Number(newHour) + 12}:${newMinute}`;
   }
-  return `${newHourAndMinute}:${second}`;
+  return `${newHourAndMinute}`;
 }

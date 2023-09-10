@@ -12,7 +12,7 @@ interface ITaskModalState {
   isCompleted: boolean;
   isOnCalendar: boolean;
   isAllDayTask: boolean;
-  isRepeatable: 'NO' | 'ALL_DAY' | 'SOME_DAY'; // 반복없음, 매일, 매주
+  isRepeatable: string; // 반복없음(NO), 매일(ALL_DAY), 매주(SOME_DAY)
 }
 
 export const TaskModalState = atom<ITaskModalState>({
