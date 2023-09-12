@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { catState } from '../../recoil/catState';
 import { userNameState, userStatusState } from '../../recoil/userInfoState';
 import GrassColorButton from './GrassColorButton';
 import LogoutButton from './LogoutButton';
 import AccountDeleteButton from './AccountDeleteButton';
 import * as S from './SettingPage.styled';
+import { useUserQuery } from '../../hooks/queries/useUserQuery';
 
 const SettingPage = () => {
-  const [currentCat] = useRecoilState(catState);
+  const { user, isLoading } = useUserQuery();
 
   const [currentName, setCurrentName] = useRecoilState(userNameState);
   const [name, setName] = useState(currentName);
@@ -53,6 +53,18 @@ const SettingPage = () => {
   };
 
   useEffect(() => {
+    if (user) {
+      setName(user.name);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      setStatus(user.intro);
+    }
+  }, [user]);
+
+  useEffect(() => {
     let timer;
     if (showModal) {
       timer = setTimeout(() => {
@@ -64,10 +76,14 @@ const SettingPage = () => {
     };
   }, [showModal]);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <S.SettingPageContainer>
       <S.ChangeWhiteBox>
-        <S.ProfileImg src={currentCat} alt='profile' />
+        <S.ProfileImg src={`/assets/images/Cat/${user?.catState}.svg`} alt='profile' />
         <S.ChangeWrap>
           <S.NameChange type='text' value={name} onChange={handleNameChange} />
         </S.ChangeWrap>
@@ -79,7 +95,6 @@ const SettingPage = () => {
           <GrassColorButton />
         </S.ChangeWrap>
         <S.ChangeBtn onClick={handleClick}> 변경하기</S.ChangeBtn>
-        {/* showModal이 true일 때만 모달 메세지 표시함 */}
         {showModal && <S.Modal>{modalMessage}</S.Modal>}
       </S.ChangeWhiteBox>
 
