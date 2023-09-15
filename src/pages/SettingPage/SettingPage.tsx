@@ -22,6 +22,25 @@ const SettingPage = () => {
   const [initialNameValue, setInitialNameValue] = useState(name);
   const [initialStatusValue, setInitialStatusValue] = useState(status);
 
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setStatus(user.intro);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    let timer;
+    if (showModal) {
+      timer = setTimeout(() => setShowModal(false), 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [showModal]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -51,34 +70,6 @@ const SettingPage = () => {
       setModalMessage('변경사항이 없습니다.');
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      setName(user.name);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      setStatus(user.intro);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    let timer;
-    if (showModal) {
-      timer = setTimeout(() => {
-        setShowModal(false);
-      }, 5000);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [showModal]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <S.SettingPageContainer>

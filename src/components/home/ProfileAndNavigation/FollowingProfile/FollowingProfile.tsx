@@ -12,43 +12,50 @@ const FollowingProfile = () => {
 
   const totalPages = Math.ceil(following.length / itemsPerPage);
 
-  const handleNextClick = () => {
-    if (currentPage < totalPages - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-  const handlePrevClick = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
+  const updateCurrentPage = (increment) => {
+    setCurrentPage((prevPage) => {
+      const newPage = prevPage + increment;
+      if (newPage < 0 || newPage >= totalPages) return prevPage;
+      return newPage;
+    });
   };
 
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedFriends = following.slice(startIndex, endIndex);
+  const handleNextClick = () => updateCurrentPage(1);
+
+  const handlePrevClick = () => updateCurrentPage(-1);
+
+  // 표시될 팔로잉 리스트 계산
+  const computeDisplayedFriends = () => {
+    const startIndex = currentPage * itemsPerPage;
+    return following.slice(startIndex, startIndex + itemsPerPage);
+  };
+
+  // 계산 함수 호출
+  const displayedFriends = computeDisplayedFriends();
 
   return (
     <F.FollowingProfileContainer>
-      {following.length > itemsPerPage && <ArrowButton direction='left' onClick={handlePrevClick} />}
+      {currentPage > 0 && <ArrowButton direction='left' onClick={handlePrevClick} />}
 
       <F.FollowingFriendsWrapParent>
-        {Array.isArray(following) &&
-          displayedFriends.map((user) => (
-            <F.FollowingFriendsWrap key={user.id}>
-              {/* <F.FollowingFriendsImg src={user.imgSrc} alt={user.name} /> */}
-              <F.FriendsName
-                style={{
-                  padding: '1px 5px',
-                  // backgroundImage: `linear-gradient(transparent 0.6rem, #${user.themeColor}  0.6rem)`,
-                }}
-              >
-                {user.name}
-              </F.FriendsName>
-            </F.FollowingFriendsWrap>
-          ))}
+        {displayedFriends.map((user) => (
+          <F.FollowingFriendsWrap key={user.id}>
+            {/* <F.FollowingFriendsImg src={user.imgSrc} alt={user.name} /> */}
+            <F.FriendsName
+              style={{
+                padding: '1px 5px',
+                // backgroundImage: `linear-gradient(transparent .6rem, #${user.themeColor} .6rem)`,
+              }}
+            >
+              {user.name}
+            </F.FriendsName>
+          </F.FollowingFriendsWrap>
+        ))}
       </F.FollowingFriendsWrapParent>
-      {following.length > itemsPerPage && <ArrowButton direction='right' onClick={handleNextClick} />}
+
+      {currentPage < totalPages - 1 && <ArrowButton direction='right' onClick={handleNextClick} />}
     </F.FollowingProfileContainer>
   );
 };
+
 export default FollowingProfile;
