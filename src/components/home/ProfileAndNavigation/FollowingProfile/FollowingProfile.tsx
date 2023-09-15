@@ -29,7 +29,7 @@ const FollowingProfile = () => {
 
   return (
     <F.FollowingProfileContainer>
-      <ArrowButton style={{ display: 'fix' }} direction='left' onClick={handlePrevClick} />
+      {following.length > itemsPerPage && <ArrowButton direction='left' onClick={handlePrevClick} />}
 
       <F.FollowingFriendsWrapParent>
         {Array.isArray(following) &&
@@ -39,7 +39,7 @@ const FollowingProfile = () => {
               <F.FriendsName
                 style={{
                   padding: '1px 5px',
-                  // backgroundImage: `linear-gradient(transparent 0.6rem, ${user.themeColor}  0.6rem)`,
+                  // backgroundImage: `linear-gradient(transparent 0.6rem, #${user.themeColor}  0.6rem)`,
                 }}
               >
                 {user.name}
@@ -47,7 +47,7 @@ const FollowingProfile = () => {
             </F.FollowingFriendsWrap>
           ))}
       </F.FollowingFriendsWrapParent>
-      <ArrowButton direction='right' onClick={handleNextClick} />
+      {following.length > itemsPerPage && <ArrowButton direction='right' onClick={handleNextClick} />}
     </F.FollowingProfileContainer>
   );
 };
