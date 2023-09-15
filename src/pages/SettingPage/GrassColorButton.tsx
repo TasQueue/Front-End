@@ -3,10 +3,12 @@ import reactCSS from 'reactcss';
 import { ChromePicker } from 'react-color';
 import { useRecoilState } from 'recoil';
 import { userThemeColorState } from '../../recoil/userInfoState';
+import { useUserQuery } from '../../hooks/queries/useUserQuery';
 
 const GrassColorButton = () => {
-  const [themeColor, setThemeColor] = useRecoilState(userThemeColorState);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+
+  const { user } = useUserQuery();
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);
@@ -16,8 +18,10 @@ const GrassColorButton = () => {
     setDisplayColorPicker(false);
   };
 
+  // 선택한 color로 테마 색을 수정(put)하는 코드 작성 필요 (api 호출)
+  // 지금은 console.log로만 찍음.
   const handleChange = (pickedColor) => {
-    setThemeColor(pickedColor.hex);
+    console.log(pickedColor.hex);
   };
 
   const handleKeyPress = (e, action) => {
@@ -33,16 +37,16 @@ const GrassColorButton = () => {
         width: '40px',
         height: '40px',
         borderRadius: '50px',
-        background: themeColor,
+        background: user?.themeColor,
       },
       swatch: {
         padding: '1px',
         background: '#fff',
-        width: '36px',
+        width: '<36px></36px>',
         borderRadius: '50px',
         display: 'inline-block',
         cursor: 'pointer',
-        margin: '0 0 0 1vw',
+        margin: '0 <0></0> <1vw></1vw>',
       },
       popover: {
         position: 'absolute' as const,
@@ -82,7 +86,7 @@ const GrassColorButton = () => {
             role='button'
             aria-label='color picker overlay'
           />
-          <ChromePicker color={themeColor} onChange={handleChange} />
+          <ChromePicker color={user?.themeColor} onChange={handleChange} />
         </div>
       ) : null}
     </div>
