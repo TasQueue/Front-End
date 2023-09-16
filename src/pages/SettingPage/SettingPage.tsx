@@ -6,9 +6,28 @@ import LogoutButton from './LogoutButton';
 import AccountDeleteButton from './AccountDeleteButton';
 import * as S from './SettingPage.styled';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
+import { useUpdateUser } from '../../hooks/queries/useUpdateUser';
 
 const SettingPage = () => {
   const { user, isLoading } = useUserQuery();
+  const mutation = useUpdateUser();
+
+  const handleSaveChangesClick = () => {
+    if (name !== user?.name || status !== user?.intro) {
+      // 변경사항이 있다면, mutation 실행
+      mutation.mutate({
+        color: 'ABC123', // 테마 색상 선택 연결 필요
+        intro: status,
+        name,
+      });
+
+      setShowModal(true);
+      setModalMessage('변경사항이 저장되었습니다.');
+    } else {
+      setShowModal(true);
+      setModalMessage('변경사항이 없습니다.');
+    }
+  };
 
   const [currentName, setCurrentName] = useRecoilState(userNameState);
   const [name, setName] = useState(currentName);
@@ -18,9 +37,6 @@ const SettingPage = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-
-  const [initialNameValue, setInitialNameValue] = useState(name);
-  const [initialStatusValue, setInitialStatusValue] = useState(status);
 
   useEffect(() => {
     if (user) {
@@ -45,30 +61,8 @@ const SettingPage = () => {
     setName(e.target.value);
   };
 
-  const handleNameClick = () => {
-    setCurrentName(name);
-  };
-
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
-  };
-
-  const handleStatusClick = () => {
-    setCurrentStatus(status);
-  };
-
-  const handleClick = () => {
-    if (initialNameValue !== name || initialStatusValue !== status) {
-      handleNameClick();
-      handleStatusClick();
-      setShowModal(true);
-      setModalMessage('변경사항이 저장되었습니다.');
-      setInitialNameValue(name);
-      setInitialStatusValue(status);
-    } else {
-      setShowModal(true);
-      setModalMessage('변경사항이 없습니다.');
-    }
   };
 
   return (
@@ -85,7 +79,7 @@ const SettingPage = () => {
           <S.GrassChangeLabel>잔디색</S.GrassChangeLabel>
           <GrassColorButton />
         </S.ChangeWrap>
-        <S.ChangeBtn onClick={handleClick}> 변경하기</S.ChangeBtn>
+        <S.ChangeBtn onClick={handleSaveChangesClick}> 변경하기</S.ChangeBtn>
         {showModal && <S.Modal>{modalMessage}</S.Modal>}
       </S.ChangeWhiteBox>
 
