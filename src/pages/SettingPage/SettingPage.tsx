@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { userNameState, userStatusState } from '../../recoil/userInfoState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userNameState, userStatusState, userThemeColorState } from '../../recoil/userInfoState';
 import GrassColorButton from './GrassColorButton';
 import LogoutButton from './LogoutButton';
 import AccountDeleteButton from './AccountDeleteButton';
@@ -11,12 +11,13 @@ import { useUpdateUser } from '../../hooks/queries/useUpdateUser';
 const SettingPage = () => {
   const { user, isLoading } = useUserQuery();
   const mutation = useUpdateUser();
+  const themeColor = useRecoilValue(userThemeColorState);
 
   const handleSaveChangesClick = () => {
-    if (name !== user?.name || status !== user?.intro) {
+    if (name !== user?.name || status !== user?.intro || themeColor !== user?.themeColor) {
       // 변경사항이 있다면, mutation 실행
       mutation.mutate({
-        color: 'ABC123', // 테마 색상 선택 연결 필요
+        color: themeColor, // 전역 변수인 userThemeColorState의 값으로 테마 색상 변경
         intro: status,
         name,
       });
