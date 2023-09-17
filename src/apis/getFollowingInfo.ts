@@ -3,10 +3,16 @@ import { authToken } from 'class/authToken';
 import { CatState } from 'types/catState';
 import customAxios from './customAxios';
 
-type Following = {
+type User = {
   id: number;
-  name: string;
   email: string;
+  name: string;
+};
+
+type Following = {
+  catState: string; // "FOUR"
+  themeColor: string; // "#C2D9FA"
+  user: User;
 };
 
 type MyFollowingResponse = {

@@ -4,10 +4,10 @@ import * as A from './ArrowButton.styled';
 interface Props extends HTMLAttributes<HTMLButtonElement> {
   direction: 'left' | 'right';
 }
-const ArrowButton: React.FC<Props> = ({ direction, ...props }) => {
+const ArrowButton: React.FC<Props> = ({ direction, style, ...props }) => {
   const arrow = direction === 'left' ? <A.Label>&#60;</A.Label> : <A.Label>&#62;</A.Label>;
   return (
-    <A.ButtonContainer type='button' onClick={props.onClick}>
+    <A.ButtonContainer type='button' onClick={props.onClick} style={style}>
       {arrow}
     </A.ButtonContainer>
   );

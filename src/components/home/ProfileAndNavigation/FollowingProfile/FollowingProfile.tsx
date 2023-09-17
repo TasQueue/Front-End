@@ -8,6 +8,7 @@ const FollowingProfile = () => {
   const itemsPerPage = 6;
 
   const { following: followingData } = useFollowingQuery();
+
   const following = followingData?.followingList || [];
 
   const totalPages = Math.ceil(following.length / itemsPerPage);
@@ -35,25 +36,43 @@ const FollowingProfile = () => {
 
   return (
     <F.FollowingProfileContainer>
-      {currentPage > 0 && <ArrowButton direction='left' onClick={handlePrevClick} />}
-
+      {currentPage > 0 && (
+        <ArrowButton
+          style={{
+            position: 'fixed',
+            top: '10%',
+            left: '9%',
+          }}
+          direction='left'
+          onClick={handlePrevClick}
+        />
+      )}
       <F.FollowingFriendsWrapParent>
         {displayedFriends.map((user) => (
-          <F.FollowingFriendsWrap key={user.id}>
-            {/* <F.FollowingFriendsImg src={user.imgSrc} alt={user.name} /> */}
+          <F.FollowingFriendsWrap key={user.user.id}>
+            <F.FollowingFriendsImg src={`/assets/images/Cat/${user?.catState}.svg`} alt={user.user.name} />
             <F.FriendsName
               style={{
                 padding: '1px 5px',
-                // backgroundImage: `linear-gradient(transparent .6rem, #${user.themeColor} .6rem)`,
+                backgroundImage: `linear-gradient(transparent .6rem, ${user.themeColor} .6rem)`,
               }}
             >
-              {user.name}
+              {user.user.name}
             </F.FriendsName>
           </F.FollowingFriendsWrap>
         ))}
       </F.FollowingFriendsWrapParent>
-
-      {currentPage < totalPages - 1 && <ArrowButton direction='right' onClick={handleNextClick} />}
+      {currentPage < totalPages - 1 && (
+        <ArrowButton
+          style={{
+            position: 'fixed',
+            top: '10%',
+            left: '25.4%',
+          }}
+          direction='right'
+          onClick={handleNextClick}
+        />
+      )}
     </F.FollowingProfileContainer>
   );
 };
