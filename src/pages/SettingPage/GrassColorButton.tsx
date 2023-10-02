@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import reactCSS from 'reactcss';
 import { ChromePicker } from 'react-color';
 import { useRecoilState } from 'recoil';
 import { userThemeColorState } from '../../recoil/userInfoState';
+import { useUserQuery } from '../../hooks/queries/useUserQuery';
 
 const GrassColorButton = () => {
-  const [themeColor, setThemeColor] = useRecoilState(userThemeColorState);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [userThemeColor, setUserThemeColor] = useRecoilState(userThemeColorState);
 
-  const handleClick = () => {
-    setDisplayColorPicker(!displayColorPicker);
-  };
+  const { user } = useUserQuery();
 
-  const handleClose = () => {
-    setDisplayColorPicker(false);
-  };
+  useEffect(() => {
+    if (user) {
+      setUserThemeColor(user.themeColor);
+    }
+  }, [user, setUserThemeColor]);
 
-  const handleChange = (pickedColor) => {
-    setThemeColor(pickedColor.hex);
-  };
+  const toggleDisplayOfPicker = () => setDisplayColorPicker((prev) => !prev);
 
-  const handleKeyPress = (e, action) => {
+  const closeDisplayOfPicker = () => setDisplayColorPicker(false);
+
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      if (action === 'toggle') handleClick();
-      else if (action === 'close') handleClose();
+      toggleDisplayOfPicker();
     }
   };
+
+  const handleChangeComplete = ({ hex }) => setUserThemeColor(hex);
 
   const styles = reactCSS({
     default: {
@@ -33,7 +35,7 @@ const GrassColorButton = () => {
         width: '40px',
         height: '40px',
         borderRadius: '50px',
-        background: themeColor,
+        background: userThemeColor,
       },
       swatch: {
         padding: '1px',
@@ -42,7 +44,7 @@ const GrassColorButton = () => {
         borderRadius: '50px',
         display: 'inline-block',
         cursor: 'pointer',
-        margin: '0 0 0 1vw',
+        margin: '0 0 1vw',
       },
       popover: {
         position: 'absolute' as const,
@@ -64,8 +66,8 @@ const GrassColorButton = () => {
     <div>
       <div
         style={styles.swatch}
-        onClick={handleClick}
-        onKeyPress={(e) => handleKeyPress(e, 'toggle')}
+        onClick={toggleDisplayOfPicker}
+        onKeyPress={handleKeyPress}
         tabIndex={0}
         role='button'
         aria-label='color swatch'
@@ -76,13 +78,13 @@ const GrassColorButton = () => {
         <div style={styles.popover}>
           <div
             style={styles.cover}
-            onClick={handleClose}
-            onKeyPress={(e) => handleKeyPress(e, 'close')}
+            onClick={closeDisplayOfPicker}
+            onKeyPress={(e) => handleKeyPress(e)}
             tabIndex={0}
             role='button'
             aria-label='color picker overlay'
           />
-          <ChromePicker color={themeColor} onChange={handleChange} />
+          <ChromePicker color={userThemeColor} onChangeComplete={handleChangeComplete} />
         </div>
       ) : null}
     </div>

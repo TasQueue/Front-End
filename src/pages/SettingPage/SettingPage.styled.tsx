@@ -88,6 +88,7 @@ export const StatusChange = styled.textarea`
 `;
 
 export const GrassChangeLabel = styled.p`
+  margin: 0.5vh 1vw 0 0;
   transition:
     width 0.5s ease,
     font-size 0.5s ease;

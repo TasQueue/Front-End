@@ -23,7 +23,7 @@ const AddCategory = ({ onClose }: IAddCategory) => {
   const [color, setColor] = React.useState('red'); // 색갈 state
   const [palleteOpen, setPalleteOpen] = useState(false); // 팔레트 오픈 state
   const setUserCategories = useSetRecoilState(categories); // 카테고리 아톰 state
-  const [input, setInput] = useState<IInput>();
+  const [input, setInput] = useState<IInput>({ name: '', color: '' });
   const [post, setPost] = useState<boolean>();
   usePostCategory(input);
 

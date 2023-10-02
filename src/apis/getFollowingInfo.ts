@@ -3,16 +3,24 @@ import { authToken } from 'class/authToken';
 import { CatState } from 'types/catState';
 import customAxios from './customAxios';
 
-type MyInfoResponse = {
+type User = {
   id: number;
+  email: string;
   name: string;
-  intro: string;
-  catState: CatState;
-  themeColor: string;
 };
 
-export function getMyInfo() {
-  return customAxios.get<MyInfoResponse>('/users/my-info', {
+type Following = {
+  catState: string; // "FOUR"
+  themeColor: string; // "#C2D9FA"
+  user: User;
+};
+
+type MyFollowingResponse = {
+  followingList: Following[];
+};
+
+export function getFollowingInfo() {
+  return customAxios.get<MyFollowingResponse>('/follows/you', {
     headers: {
       Authorization: `Bearer ${window.localStorage.getItem('userAccessToken')}`,
     },

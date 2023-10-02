@@ -14,6 +14,9 @@ export const FollowingProfileContainer = styled.div`
 export const FollowingFriendsWrapParent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  position: fixed;
+  left: 11%;
+  top: 3%;
 `;
 export const FollowingFriendsWrap = styled.div`
   background-color: #ffffff;
@@ -25,6 +28,7 @@ export const FollowingFriendsWrap = styled.div`
   margin: 3px;
   border-radius: 30%;
 `;
+
 export const FollowingFriendsImg = styled.img`
   width: 80%;
   border-radius: 50%;

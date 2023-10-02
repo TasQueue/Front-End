@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { catState } from '../../recoil/catState';
-import { userNameState, userStatusState } from '../../recoil/userInfoState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userNameState, userStatusState, userThemeColorState } from '../../recoil/userInfoState';
 import GrassColorButton from './GrassColorButton';
 import LogoutButton from './LogoutButton';
 import AccountDeleteButton from './AccountDeleteButton';
 import * as S from './SettingPage.styled';
+import { useUserQuery } from '../../hooks/queries/useUserQuery';
+import { useUpdateUser } from '../../hooks/queries/useUpdateUser';
 
 const SettingPage = () => {
-  const [currentCat] = useRecoilState(catState);
+  const { user, isLoading } = useUserQuery();
+  const mutation = useUpdateUser();
+  const themeColor = useRecoilValue(userThemeColorState);
+
+  const handleSaveChangesClick = () => {
+    if (name !== user?.name || status !== user?.intro || themeColor !== user?.themeColor) {
+      // 변경사항이 있다면, mutation 실행
+      mutation.mutate({
+        color: themeColor, // 전역 변수인 userThemeColorState의 값으로 테마 색상 변경
+        intro: status,
+        name,
+      });
+
+      setShowModal(true);
+      setModalMessage('변경사항이 저장되었습니다.');
+    } else {
+      setShowModal(true);
+      setModalMessage('변경사항이 없습니다.');
+    }
+  };
 
   const [currentName, setCurrentName] = useRecoilState(userNameState);
   const [name, setName] = useState(currentName);
@@ -19,55 +39,37 @@ const SettingPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  const [initialNameValue, setInitialNameValue] = useState(name);
-  const [initialStatusValue, setInitialStatusValue] = useState(status);
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setStatus(user.intro);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    let timer;
+    if (showModal) {
+      timer = setTimeout(() => setShowModal(false), 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [showModal]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-  };
-
-  const handleNameClick = () => {
-    setCurrentName(name);
   };
 
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
 
-  const handleStatusClick = () => {
-    setCurrentStatus(status);
-  };
-
-  const handleClick = () => {
-    if (initialNameValue !== name || initialStatusValue !== status) {
-      handleNameClick();
-      handleStatusClick();
-      setShowModal(true);
-      setModalMessage('변경사항이 저장되었습니다.');
-      setInitialNameValue(name);
-      setInitialStatusValue(status);
-    } else {
-      setShowModal(true);
-      setModalMessage('변경사항이 없습니다.');
-    }
-  };
-
-  useEffect(() => {
-    let timer;
-    if (showModal) {
-      timer = setTimeout(() => {
-        setShowModal(false);
-      }, 5000);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [showModal]);
-
   return (
     <S.SettingPageContainer>
       <S.ChangeWhiteBox>
-        <S.ProfileImg src={currentCat} alt='profile' />
+        <S.ProfileImg src={`/assets/images/Cat/${user?.catState}.svg`} alt='profile' />
         <S.ChangeWrap>
           <S.NameChange type='text' value={name} onChange={handleNameChange} />
         </S.ChangeWrap>
@@ -78,8 +80,7 @@ const SettingPage = () => {
           <S.GrassChangeLabel>잔디색</S.GrassChangeLabel>
           <GrassColorButton />
         </S.ChangeWrap>
-        <S.ChangeBtn onClick={handleClick}> 변경하기</S.ChangeBtn>
-        {/* showModal이 true일 때만 모달 메세지 표시함 */}
+        <S.ChangeBtn onClick={handleSaveChangesClick}> 변경하기</S.ChangeBtn>
         {showModal && <S.Modal>{modalMessage}</S.Modal>}
       </S.ChangeWhiteBox>
 
